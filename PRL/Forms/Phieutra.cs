@@ -594,14 +594,14 @@ namespace PRL.Forms
                                                                     var sach = _sach.GetAll().FirstOrDefault(x => x.Masach == txtsach.Text);
                                                                     if (sach != null)
                                                                     {
-                                                                        var updatesachcu = _sach.Update(txtsach.Text, new DAL.Models.Sach
+                                                                        var updatesachcu = _sach.Update(thongtinmuon.Masach, new DAL.Models.Sach
                                                                         {
                                                                             Tensach = sach.Tensach,
                                                                             Ngayxb = sach.Ngayxb,
                                                                             Sotrang = sach.Sotrang,
                                                                             Giaban = sach.Giaban,
                                                                             Trangthai = sach.Trangthai,
-                                                                            Soluong = sach.Soluong - thongtinmuon.Soluong + phieutract.Soluong
+                                                                            Soluong = sach.Soluong - thongtinmuon.Soluong
                                                                         });
                                                                         var updatesachmoi = _sach.Update(txtsach.Text, new DAL.Models.Sach
                                                                         {
@@ -610,9 +610,9 @@ namespace PRL.Forms
                                                                             Sotrang = sach.Sotrang,
                                                                             Giaban = sach.Giaban,
                                                                             Trangthai = sach.Trangthai,
-                                                                            Soluong = sach.Soluong - thongtinmuon.Soluong + phieutract.Soluong
+                                                                            Soluong = sach.Soluong + phieutract.Soluong
                                                                         });
-                                                                        if (updatesachcu)
+                                                                        if (updatesachcu&&updatesachmoi)
                                                                         {
                                                                             LoadSach(_sach.GetAll());
                                                                             LoadDataCT(txtid.Text);
