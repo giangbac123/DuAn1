@@ -9,7 +9,6 @@ namespace DAL.Models
         public string Matra { get; set; } = null!;
         public string Masach { get; set; } = null!;
         public int Soluong { get; set; }
-        public decimal Tiencoc { get; set; }
         public string? Trangthai { get; set; }
         public DateTime Ngaymuon { get; set; }
         public DateTime Ngaytra { get; set; }

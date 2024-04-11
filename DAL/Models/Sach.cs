@@ -8,6 +8,7 @@ namespace DAL.Models
         public Sach()
         {
             Phieumuoncts = new HashSet<Phieumuonct>();
+            PhieutractXuphats = new HashSet<PhieutractXuphat>();
             Phieutracts = new HashSet<Phieutract>();
             Sachcts = new HashSet<Sachct>();
         }
@@ -21,6 +22,7 @@ namespace DAL.Models
         public string? Trangthai { get; set; }
 
         public virtual ICollection<Phieumuonct> Phieumuoncts { get; set; }
+        public virtual ICollection<PhieutractXuphat> PhieutractXuphats { get; set; }
         public virtual ICollection<Phieutract> Phieutracts { get; set; }
         public virtual ICollection<Sachct> Sachcts { get; set; }
     }

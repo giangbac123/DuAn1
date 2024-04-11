@@ -11,7 +11,7 @@ namespace DAL.Models
         public int Soluong { get; set; }
         public DateTime Ngaymuon { get; set; }
         public DateTime Ngaytra { get; set; }
-        public decimal Tiencoc { get; set; }
+        public int Tienphi { get; set; }
 
         public virtual Phieumuon MamuonNavigation { get; set; } = null!;
         public virtual Sach MasachNavigation { get; set; } = null!;

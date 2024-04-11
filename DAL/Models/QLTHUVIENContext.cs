@@ -42,7 +42,7 @@ namespace DAL.Models
             modelBuilder.Entity<Nguoidung>(entity =>
             {
                 entity.HasKey(e => e.Mand)
-                    .HasName("PK__NGUOIDUN__603F51062412A90A");
+                    .HasName("PK__NGUOIDUN__603F5106DEAD476D");
 
                 entity.ToTable("NGUOIDUNG");
 
@@ -91,7 +91,7 @@ namespace DAL.Models
             modelBuilder.Entity<Nhaxuatban>(entity =>
             {
                 entity.HasKey(e => e.Manxb)
-                    .HasName("PK__NHAXUATB__7ABD9EF24FDE2CB3");
+                    .HasName("PK__NHAXUATB__7ABD9EF2FBF47409");
 
                 entity.ToTable("NHAXUATBAN");
 
@@ -117,7 +117,7 @@ namespace DAL.Models
             modelBuilder.Entity<Phieumuon>(entity =>
             {
                 entity.HasKey(e => e.Mamuon)
-                    .HasName("PK__PHIEUMUO__5065699E831D17B1");
+                    .HasName("PK__PHIEUMUO__5065699E1A92B27A");
 
                 entity.ToTable("PHIEUMUON");
 
@@ -143,7 +143,7 @@ namespace DAL.Models
             modelBuilder.Entity<Phieumuonct>(entity =>
             {
                 entity.HasKey(e => e.Mamuonct)
-                    .HasName("PK__PHIEUMUO__5102A9AD9B4CF927");
+                    .HasName("PK__PHIEUMUO__5102A9ADBB44253D");
 
                 entity.ToTable("PHIEUMUONCT");
 
@@ -169,9 +169,7 @@ namespace DAL.Models
 
                 entity.Property(e => e.Soluong).HasColumnName("SOLUONG");
 
-                entity.Property(e => e.Tiencoc)
-                    .HasColumnType("money")
-                    .HasColumnName("TIENCOC");
+                entity.Property(e => e.Tienphi).HasColumnName("TIENPHI");
 
                 entity.HasOne(d => d.MamuonNavigation)
                     .WithMany(p => p.Phieumuoncts)
@@ -189,7 +187,7 @@ namespace DAL.Models
             modelBuilder.Entity<Phieutra>(entity =>
             {
                 entity.HasKey(e => e.Matra)
-                    .HasName("PK__PHIEUTRA__58240C494ED75354");
+                    .HasName("PK__PHIEUTRA__58240C49FE878C87");
 
                 entity.ToTable("PHIEUTRA");
 
@@ -211,7 +209,7 @@ namespace DAL.Models
             modelBuilder.Entity<Phieutract>(entity =>
             {
                 entity.HasKey(e => e.Matract)
-                    .HasName("PK__PHIEUTRA__D503DBE761B8523D");
+                    .HasName("PK__PHIEUTRA__D503DBE7A04BC93D");
 
                 entity.ToTable("PHIEUTRACT");
 
@@ -237,10 +235,6 @@ namespace DAL.Models
 
                 entity.Property(e => e.Soluong).HasColumnName("SOLUONG");
 
-                entity.Property(e => e.Tiencoc)
-                    .HasColumnType("money")
-                    .HasColumnName("TIENCOC");
-
                 entity.Property(e => e.Trangthai)
                     .HasMaxLength(50)
                     .HasColumnName("TRANGTHAI");
@@ -261,7 +255,7 @@ namespace DAL.Models
             modelBuilder.Entity<PhieutractXuphat>(entity =>
             {
                 entity.HasKey(e => e.MatractXp)
-                    .HasName("PK__PHIEUTRA__57E68E8245F0C5A1");
+                    .HasName("PK__PHIEUTRA__57E68E82CC7F6C7E");
 
                 entity.ToTable("PHIEUTRACT_XUPHAT");
 
@@ -271,6 +265,11 @@ namespace DAL.Models
                     .HasMaxLength(255)
                     .HasColumnName("GHICHU");
 
+                entity.Property(e => e.Masach)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("MASACH");
+
                 entity.Property(e => e.Matra)
                     .HasMaxLength(10)
                     .IsUnicode(false)
@@ -279,6 +278,12 @@ namespace DAL.Models
                 entity.Property(e => e.Soluong).HasColumnName("SOLUONG");
 
                 entity.Property(e => e.Tienphat).HasColumnName("TIENPHAT");
+
+                entity.HasOne(d => d.MasachNavigation)
+                    .WithMany(p => p.PhieutractXuphats)
+                    .HasForeignKey(d => d.Masach)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__PHIEUTRAC__MASAC__403A8C7D");
 
                 entity.HasOne(d => d.MatraNavigation)
                     .WithMany(p => p.PhieutractXuphats)
@@ -290,7 +295,7 @@ namespace DAL.Models
             modelBuilder.Entity<Sach>(entity =>
             {
                 entity.HasKey(e => e.Masach)
-                    .HasName("PK__SACH__3FC48E4C33349C06");
+                    .HasName("PK__SACH__3FC48E4C3AAFD26B");
 
                 entity.ToTable("SACH");
 
@@ -323,7 +328,7 @@ namespace DAL.Models
             modelBuilder.Entity<Sachct>(entity =>
             {
                 entity.HasKey(e => e.Masachct)
-                    .HasName("PK__SACHCT__EAD06DB8636A49E2");
+                    .HasName("PK__SACHCT__EAD06DB8A32D5215");
 
                 entity.ToTable("SACHCT");
 
@@ -374,7 +379,7 @@ namespace DAL.Models
             modelBuilder.Entity<Tacgium>(entity =>
             {
                 entity.HasKey(e => e.Matg)
-                    .HasName("PK__TACGIA__6023721A7B906115");
+                    .HasName("PK__TACGIA__6023721AC724CFA6");
 
                 entity.ToTable("TACGIA");
 
@@ -391,7 +396,7 @@ namespace DAL.Models
             modelBuilder.Entity<Theloai>(entity =>
             {
                 entity.HasKey(e => e.Matl)
-                    .HasName("PK__THELOAI__602372179B11D963");
+                    .HasName("PK__THELOAI__602372175ED5D92C");
 
                 entity.ToTable("THELOAI");
 
