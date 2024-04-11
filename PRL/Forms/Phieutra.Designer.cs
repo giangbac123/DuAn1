@@ -46,15 +46,15 @@
             textBox1 = new TextBox();
             SachView = new DataGridView();
             groupBox3 = new GroupBox();
+            txttenkh = new TextBox();
             button2 = new Button();
             button3 = new Button();
-            textBox2 = new TextBox();
+            txtsach = new TextBox();
             dateTimePicker2 = new DateTimePicker();
             dateTimePicker1 = new DateTimePicker();
             label7 = new Label();
             label9 = new Label();
-            txtmamuon = new TextBox();
-            comboboxnv = new ComboBox();
+            txtcccd = new TextBox();
             label4 = new Label();
             label5 = new Label();
             label6 = new Label();
@@ -87,6 +87,8 @@
             HDtraView.RowTemplate.Height = 29;
             HDtraView.Size = new Size(577, 299);
             HDtraView.TabIndex = 0;
+            HDtraView.CellClick += HDtraView_CellClick;
+            HDtraView.CellContentClick += HDtraView_CellContentClick;
             // 
             // HDtraCTview
             // 
@@ -97,6 +99,8 @@
             HDtraCTview.RowTemplate.Height = 29;
             HDtraCTview.Size = new Size(520, 299);
             HDtraCTview.TabIndex = 1;
+            HDtraCTview.CellClick += HDtraCTview_CellClick;
+            HDtraCTview.CellContentClick += HDtraCTview_CellContentClick;
             // 
             // groupBox5
             // 
@@ -139,6 +143,7 @@
             btnEdit.TabIndex = 31;
             btnEdit.Text = "Update";
             btnEdit.UseVisualStyleBackColor = true;
+            btnEdit.Click += btnEdit_Click;
             // 
             // btnAdd
             // 
@@ -150,6 +155,7 @@
             btnAdd.TabIndex = 30;
             btnAdd.Text = "New";
             btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
             // 
             // button1
             // 
@@ -201,6 +207,7 @@
             btnTK.PlaceholderText = "Nhập thông tin tìm kiếm";
             btnTK.Size = new Size(500, 27);
             btnTK.TabIndex = 0;
+            btnTK.TextChanged += btnTK_TextChanged;
             // 
             // groupBox2
             // 
@@ -230,18 +237,19 @@
             SachView.RowTemplate.Height = 29;
             SachView.Size = new Size(592, 214);
             SachView.TabIndex = 0;
+            SachView.CellClick += SachView_CellClick;
             // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(txttenkh);
             groupBox3.Controls.Add(button2);
             groupBox3.Controls.Add(button3);
-            groupBox3.Controls.Add(textBox2);
+            groupBox3.Controls.Add(txtsach);
             groupBox3.Controls.Add(dateTimePicker2);
             groupBox3.Controls.Add(dateTimePicker1);
             groupBox3.Controls.Add(label7);
             groupBox3.Controls.Add(label9);
-            groupBox3.Controls.Add(txtmamuon);
-            groupBox3.Controls.Add(comboboxnv);
+            groupBox3.Controls.Add(txtcccd);
             groupBox3.Controls.Add(label4);
             groupBox3.Controls.Add(label5);
             groupBox3.Controls.Add(label6);
@@ -260,11 +268,19 @@
             groupBox3.TabStop = false;
             groupBox3.Text = "Thực hiện cho mượn";
             // 
+            // txttenkh
+            // 
+            txttenkh.Location = new Point(111, 87);
+            txttenkh.Name = "txttenkh";
+            txttenkh.Size = new Size(125, 27);
+            txttenkh.TabIndex = 34;
+            txttenkh.KeyPress += txttenkh_KeyPress;
+            // 
             // button2
             // 
             button2.AutoSize = true;
             button2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            button2.Location = new Point(255, 321);
+            button2.Location = new Point(64, 321);
             button2.Name = "button2";
             button2.Size = new Size(126, 50);
             button2.TabIndex = 33;
@@ -275,24 +291,25 @@
             // 
             button3.AutoSize = true;
             button3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            button3.Location = new Point(107, 321);
+            button3.Location = new Point(64, 218);
             button3.Name = "button3";
             button3.Size = new Size(126, 50);
             button3.TabIndex = 32;
             button3.Text = "Add";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
-            // textBox2
+            // txtsach
             // 
-            textBox2.Enabled = false;
-            textBox2.Location = new Point(110, 200);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(125, 27);
-            textBox2.TabIndex = 26;
+            txtsach.Enabled = false;
+            txtsach.Location = new Point(341, 38);
+            txtsach.Name = "txtsach";
+            txtsach.Size = new Size(125, 27);
+            txtsach.TabIndex = 26;
             // 
             // dateTimePicker2
             // 
-            dateTimePicker2.Location = new Point(340, 147);
+            dateTimePicker2.Location = new Point(341, 254);
             dateTimePicker2.Name = "dateTimePicker2";
             dateTimePicker2.Size = new Size(125, 27);
             dateTimePicker2.TabIndex = 25;
@@ -300,7 +317,7 @@
             // dateTimePicker1
             // 
             dateTimePicker1.CustomFormat = "dd/MM/yyyy";
-            dateTimePicker1.Location = new Point(340, 95);
+            dateTimePicker1.Location = new Point(341, 193);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(125, 27);
             dateTimePicker1.TabIndex = 24;
@@ -308,7 +325,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(30, 200);
+            label7.Location = new Point(257, 41);
             label7.Name = "label7";
             label7.Size = new Size(63, 20);
             label7.TabIndex = 22;
@@ -317,49 +334,42 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(26, 152);
+            label9.Location = new Point(26, 142);
             label9.Name = "label9";
-            label9.Size = new Size(73, 20);
+            label9.Size = new Size(68, 20);
             label9.TabIndex = 21;
-            label9.Text = "Mã mượn";
+            label9.Text = "Số CCCD";
             // 
-            // txtmamuon
+            // txtcccd
             // 
-            txtmamuon.Location = new Point(110, 149);
-            txtmamuon.Name = "txtmamuon";
-            txtmamuon.Size = new Size(125, 27);
-            txtmamuon.TabIndex = 20;
-            // 
-            // comboboxnv
-            // 
-            comboboxnv.FormattingEnabled = true;
-            comboboxnv.Location = new Point(110, 97);
-            comboboxnv.Name = "comboboxnv";
-            comboboxnv.Size = new Size(125, 28);
-            comboboxnv.TabIndex = 18;
+            txtcccd.Location = new Point(111, 135);
+            txtcccd.Name = "txtcccd";
+            txtcccd.Size = new Size(125, 27);
+            txtcccd.TabIndex = 20;
+            txtcccd.KeyPress += txtcccd_KeyPress;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(30, 100);
+            label4.Location = new Point(26, 90);
             label4.Name = "label4";
-            label4.Size = new Size(75, 20);
+            label4.Size = new Size(78, 20);
             label4.TabIndex = 17;
-            label4.Text = "Nhân viên";
+            label4.Text = "Họ tên KH";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(255, 48);
+            label5.Location = new Point(257, 138);
             label5.Name = "label5";
-            label5.Size = new Size(64, 20);
+            label5.Size = new Size(54, 20);
             label5.TabIndex = 15;
-            label5.Text = "Tiền cọc";
+            label5.Text = "Phí thu";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(26, 247);
+            label6.Location = new Point(257, 85);
             label6.Name = "label6";
             label6.Size = new Size(46, 20);
             label6.TabIndex = 14;
@@ -368,7 +378,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(30, 48);
+            label8.Location = new Point(26, 41);
             label8.Name = "label8";
             label8.Size = new Size(71, 20);
             label8.TabIndex = 12;
@@ -377,23 +387,23 @@
             // txtid
             // 
             txtid.Enabled = false;
-            txtid.Location = new Point(110, 45);
+            txtid.Location = new Point(110, 35);
             txtid.Name = "txtid";
             txtid.Size = new Size(125, 27);
             txtid.TabIndex = 10;
             // 
             // txtsl
             // 
-            txtsl.Location = new Point(110, 244);
+            txtsl.Location = new Point(341, 82);
             txtsl.Name = "txtsl";
             txtsl.Size = new Size(125, 27);
             txtsl.TabIndex = 9;
-            txtsl.Text = "0";
+            txtsl.KeyPress += txtsl_KeyPress;
             // 
             // txttien
             // 
             txttien.Enabled = false;
-            txttien.Location = new Point(340, 45);
+            txttien.Location = new Point(341, 135);
             txttien.Name = "txttien";
             txttien.Size = new Size(125, 27);
             txttien.TabIndex = 8;
@@ -402,7 +412,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(247, 200);
+            label3.Location = new Point(257, 314);
             label3.Name = "label3";
             label3.Size = new Size(75, 20);
             label3.TabIndex = 6;
@@ -411,7 +421,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(247, 152);
+            label2.Location = new Point(257, 259);
             label2.Name = "label2";
             label2.Size = new Size(66, 20);
             label2.TabIndex = 5;
@@ -420,7 +430,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(247, 100);
+            label1.Location = new Point(257, 198);
             label1.Name = "label1";
             label1.Size = new Size(87, 20);
             label1.TabIndex = 4;
@@ -428,7 +438,7 @@
             // 
             // txttrangthai
             // 
-            txttrangthai.Location = new Point(340, 197);
+            txttrangthai.Location = new Point(341, 311);
             txttrangthai.Name = "txttrangthai";
             txttrangthai.Size = new Size(125, 27);
             txttrangthai.TabIndex = 1;
@@ -502,8 +512,6 @@
         private TextBox textBox1;
         private DataGridView SachView;
         private GroupBox groupBox3;
-        private ComboBox comboboxnv;
-        private Label label4;
         private Label label5;
         private Label label6;
         private Label label8;
@@ -516,14 +524,16 @@
         private TextBox textBox5;
         private TextBox textBox4;
         private TextBox txttrangthai;
-        private Label label9;
-        private TextBox txtmamuon;
         private Label label7;
         private DateTimePicker dateTimePicker2;
         private DateTimePicker dateTimePicker1;
-        private TextBox textBox2;
+        private TextBox txtsach;
         private Button button2;
         private Button button3;
         private Button button4;
+        private TextBox txttenkh;
+        private Label label9;
+        private TextBox txtcccd;
+        private Label label4;
     }
 }
