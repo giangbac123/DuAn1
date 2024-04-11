@@ -454,6 +454,7 @@
             button4.TabIndex = 36;
             button4.Text = "Pay";
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // Phieutra
             // 
