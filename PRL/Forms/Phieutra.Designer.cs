@@ -81,11 +81,12 @@
             // HDtraView
             // 
             HDtraView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            HDtraView.Location = new Point(6, 26);
+            HDtraView.Location = new Point(8, 32);
+            HDtraView.Margin = new Padding(4, 4, 4, 4);
             HDtraView.Name = "HDtraView";
             HDtraView.RowHeadersWidth = 51;
             HDtraView.RowTemplate.Height = 29;
-            HDtraView.Size = new Size(577, 299);
+            HDtraView.Size = new Size(721, 374);
             HDtraView.TabIndex = 0;
             HDtraView.CellClick += HDtraView_CellClick;
             HDtraView.CellContentClick += HDtraView_CellContentClick;
@@ -93,11 +94,12 @@
             // HDtraCTview
             // 
             HDtraCTview.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            HDtraCTview.Location = new Point(9, 26);
+            HDtraCTview.Location = new Point(11, 32);
+            HDtraCTview.Margin = new Padding(4, 4, 4, 4);
             HDtraCTview.Name = "HDtraCTview";
             HDtraCTview.RowHeadersWidth = 51;
             HDtraCTview.RowTemplate.Height = 29;
-            HDtraCTview.Size = new Size(520, 299);
+            HDtraCTview.Size = new Size(650, 374);
             HDtraCTview.TabIndex = 1;
             HDtraCTview.CellClick += HDtraCTview_CellClick;
             HDtraCTview.CellContentClick += HDtraCTview_CellContentClick;
@@ -105,9 +107,11 @@
             // groupBox5
             // 
             groupBox5.Controls.Add(HDtraCTview);
-            groupBox5.Location = new Point(633, 550);
+            groupBox5.Location = new Point(791, 688);
+            groupBox5.Margin = new Padding(4, 4, 4, 4);
             groupBox5.Name = "groupBox5";
-            groupBox5.Size = new Size(535, 331);
+            groupBox5.Padding = new Padding(4, 4, 4, 4);
+            groupBox5.Size = new Size(669, 414);
             groupBox5.TabIndex = 35;
             groupBox5.TabStop = false;
             groupBox5.Text = "Chi tiết hóa đơn:";
@@ -115,9 +119,11 @@
             // groupBox6
             // 
             groupBox6.Controls.Add(HDtraView);
-            groupBox6.Location = new Point(37, 550);
+            groupBox6.Location = new Point(46, 688);
+            groupBox6.Margin = new Padding(4, 4, 4, 4);
             groupBox6.Name = "groupBox6";
-            groupBox6.Size = new Size(589, 331);
+            groupBox6.Padding = new Padding(4, 4, 4, 4);
+            groupBox6.Size = new Size(736, 414);
             groupBox6.TabIndex = 34;
             groupBox6.TabStop = false;
             groupBox6.Text = "Danh sách hóa đơn:";
@@ -126,9 +132,10 @@
             // 
             btnClear.AutoSize = true;
             btnClear.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnClear.Location = new Point(651, 87);
+            btnClear.Location = new Point(814, 109);
+            btnClear.Margin = new Padding(4, 4, 4, 4);
             btnClear.Name = "btnClear";
-            btnClear.Size = new Size(126, 50);
+            btnClear.Size = new Size(158, 62);
             btnClear.TabIndex = 33;
             btnClear.Text = "Hủy";
             btnClear.UseVisualStyleBackColor = true;
@@ -137,9 +144,10 @@
             // 
             btnEdit.AutoSize = true;
             btnEdit.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnEdit.Location = new Point(318, 474);
+            btnEdit.Location = new Point(398, 592);
+            btnEdit.Margin = new Padding(4, 4, 4, 4);
             btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(126, 50);
+            btnEdit.Size = new Size(158, 62);
             btnEdit.TabIndex = 31;
             btnEdit.Text = "Update";
             btnEdit.UseVisualStyleBackColor = true;
@@ -149,9 +157,10 @@
             // 
             btnAdd.AutoSize = true;
             btnAdd.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnAdd.Location = new Point(185, 474);
+            btnAdd.Location = new Point(231, 592);
+            btnAdd.Margin = new Padding(4, 4, 4, 4);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(126, 50);
+            btnAdd.Size = new Size(158, 62);
             btnAdd.TabIndex = 30;
             btnAdd.Text = "New";
             btnAdd.UseVisualStyleBackColor = true;
@@ -161,12 +170,14 @@
             // 
             button1.AutoSize = true;
             button1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.Location = new Point(809, 87);
+            button1.Location = new Point(1011, 109);
+            button1.Margin = new Padding(4, 4, 4, 4);
             button1.Name = "button1";
-            button1.Size = new Size(126, 50);
+            button1.Size = new Size(158, 62);
             button1.TabIndex = 27;
             button1.Text = "Thoát";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // menuStrip1
             // 
@@ -174,38 +185,42 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { phiếuMượnToolStripMenuItem, phiếuTrảToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1219, 28);
+            menuStrip1.Padding = new Padding(8, 2, 0, 2);
+            menuStrip1.Size = new Size(1524, 33);
             menuStrip1.TabIndex = 25;
             menuStrip1.Text = "menuStrip1";
             // 
             // phiếuMượnToolStripMenuItem
             // 
             phiếuMượnToolStripMenuItem.Name = "phiếuMượnToolStripMenuItem";
-            phiếuMượnToolStripMenuItem.Size = new Size(102, 24);
+            phiếuMượnToolStripMenuItem.Size = new Size(124, 29);
             phiếuMượnToolStripMenuItem.Text = "Phiếu mượn";
             // 
             // phiếuTrảToolStripMenuItem
             // 
             phiếuTrảToolStripMenuItem.Name = "phiếuTrảToolStripMenuItem";
-            phiếuTrảToolStripMenuItem.Size = new Size(81, 24);
+            phiếuTrảToolStripMenuItem.Size = new Size(97, 29);
             phiếuTrảToolStripMenuItem.Text = "Phiếu trả";
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(btnTK);
-            groupBox1.Location = new Point(46, 70);
+            groupBox1.Location = new Point(58, 88);
+            groupBox1.Margin = new Padding(4, 4, 4, 4);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(580, 77);
+            groupBox1.Padding = new Padding(4, 4, 4, 4);
+            groupBox1.Size = new Size(725, 96);
             groupBox1.TabIndex = 26;
             groupBox1.TabStop = false;
             groupBox1.Text = "Tìm kiếm";
             // 
             // btnTK
             // 
-            btnTK.Location = new Point(40, 32);
+            btnTK.Location = new Point(50, 40);
+            btnTK.Margin = new Padding(4, 4, 4, 4);
             btnTK.Name = "btnTK";
             btnTK.PlaceholderText = "Nhập thông tin tìm kiếm";
-            btnTK.Size = new Size(500, 27);
+            btnTK.Size = new Size(624, 31);
             btnTK.TabIndex = 0;
             btnTK.TextChanged += btnTK_TextChanged;
             // 
@@ -213,29 +228,33 @@
             // 
             groupBox2.Controls.Add(textBox1);
             groupBox2.Controls.Add(SachView);
-            groupBox2.Location = new Point(46, 153);
+            groupBox2.Location = new Point(58, 191);
+            groupBox2.Margin = new Padding(4, 4, 4, 4);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(604, 300);
+            groupBox2.Padding = new Padding(4, 4, 4, 4);
+            groupBox2.Size = new Size(755, 375);
             groupBox2.TabIndex = 28;
             groupBox2.TabStop = false;
             groupBox2.Text = "Thông tin sách";
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(17, 38);
+            textBox1.Location = new Point(21, 48);
+            textBox1.Margin = new Padding(4, 4, 4, 4);
             textBox1.Name = "textBox1";
             textBox1.PlaceholderText = "Nhập thông tin sách";
-            textBox1.Size = new Size(358, 27);
+            textBox1.Size = new Size(446, 31);
             textBox1.TabIndex = 1;
             // 
             // SachView
             // 
             SachView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            SachView.Location = new Point(6, 80);
+            SachView.Location = new Point(8, 100);
+            SachView.Margin = new Padding(4, 4, 4, 4);
             SachView.Name = "SachView";
             SachView.RowHeadersWidth = 51;
             SachView.RowTemplate.Height = 29;
-            SachView.Size = new Size(592, 214);
+            SachView.Size = new Size(740, 268);
             SachView.TabIndex = 0;
             SachView.CellClick += SachView_CellClick;
             // 
@@ -261,18 +280,21 @@
             groupBox3.Controls.Add(label2);
             groupBox3.Controls.Add(label1);
             groupBox3.Controls.Add(txttrangthai);
-            groupBox3.Location = new Point(676, 153);
+            groupBox3.Location = new Point(845, 191);
+            groupBox3.Margin = new Padding(4, 4, 4, 4);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(492, 391);
+            groupBox3.Padding = new Padding(4, 4, 4, 4);
+            groupBox3.Size = new Size(615, 489);
             groupBox3.TabIndex = 7;
             groupBox3.TabStop = false;
             groupBox3.Text = "Thực hiện cho mượn";
             // 
             // txttenkh
             // 
-            txttenkh.Location = new Point(111, 87);
+            txttenkh.Location = new Point(139, 109);
+            txttenkh.Margin = new Padding(4, 4, 4, 4);
             txttenkh.Name = "txttenkh";
-            txttenkh.Size = new Size(125, 27);
+            txttenkh.Size = new Size(155, 31);
             txttenkh.TabIndex = 34;
             txttenkh.KeyPress += txttenkh_KeyPress;
             // 
@@ -280,9 +302,10 @@
             // 
             button2.AutoSize = true;
             button2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            button2.Location = new Point(64, 321);
+            button2.Location = new Point(80, 401);
+            button2.Margin = new Padding(4, 4, 4, 4);
             button2.Name = "button2";
-            button2.Size = new Size(126, 50);
+            button2.Size = new Size(158, 62);
             button2.TabIndex = 33;
             button2.Text = "Update";
             button2.UseVisualStyleBackColor = true;
@@ -291,9 +314,10 @@
             // 
             button3.AutoSize = true;
             button3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            button3.Location = new Point(64, 218);
+            button3.Location = new Point(80, 272);
+            button3.Margin = new Padding(4, 4, 4, 4);
             button3.Name = "button3";
-            button3.Size = new Size(126, 50);
+            button3.Size = new Size(158, 62);
             button3.TabIndex = 32;
             button3.Text = "Add";
             button3.UseVisualStyleBackColor = true;
@@ -302,163 +326,181 @@
             // txtsach
             // 
             txtsach.Enabled = false;
-            txtsach.Location = new Point(341, 38);
+            txtsach.Location = new Point(426, 48);
+            txtsach.Margin = new Padding(4, 4, 4, 4);
             txtsach.Name = "txtsach";
-            txtsach.Size = new Size(125, 27);
+            txtsach.Size = new Size(155, 31);
             txtsach.TabIndex = 26;
             // 
             // dateTimePicker2
             // 
-            dateTimePicker2.Location = new Point(341, 254);
+            dateTimePicker2.Location = new Point(426, 318);
+            dateTimePicker2.Margin = new Padding(4, 4, 4, 4);
             dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(125, 27);
+            dateTimePicker2.Size = new Size(155, 31);
             dateTimePicker2.TabIndex = 25;
             // 
             // dateTimePicker1
             // 
             dateTimePicker1.CustomFormat = "dd/MM/yyyy";
-            dateTimePicker1.Location = new Point(341, 193);
+            dateTimePicker1.Location = new Point(426, 241);
+            dateTimePicker1.Margin = new Padding(4, 4, 4, 4);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(125, 27);
+            dateTimePicker1.Size = new Size(155, 31);
             dateTimePicker1.TabIndex = 24;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(257, 41);
+            label7.Location = new Point(321, 51);
+            label7.Margin = new Padding(4, 0, 4, 0);
             label7.Name = "label7";
-            label7.Size = new Size(63, 20);
+            label7.Size = new Size(77, 25);
             label7.TabIndex = 22;
             label7.Text = "Mã sách";
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(26, 142);
+            label9.Location = new Point(32, 178);
+            label9.Margin = new Padding(4, 0, 4, 0);
             label9.Name = "label9";
-            label9.Size = new Size(68, 20);
+            label9.Size = new Size(84, 25);
             label9.TabIndex = 21;
             label9.Text = "Số CCCD";
             // 
             // txtcccd
             // 
-            txtcccd.Location = new Point(111, 135);
+            txtcccd.Location = new Point(139, 169);
+            txtcccd.Margin = new Padding(4, 4, 4, 4);
             txtcccd.Name = "txtcccd";
-            txtcccd.Size = new Size(125, 27);
+            txtcccd.Size = new Size(155, 31);
             txtcccd.TabIndex = 20;
             txtcccd.KeyPress += txtcccd_KeyPress;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(26, 90);
+            label4.Location = new Point(32, 112);
+            label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(78, 20);
+            label4.Size = new Size(94, 25);
             label4.TabIndex = 17;
             label4.Text = "Họ tên KH";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(257, 138);
+            label5.Location = new Point(321, 172);
+            label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new Size(54, 20);
+            label5.Size = new Size(67, 25);
             label5.TabIndex = 15;
             label5.Text = "Phí thu";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(257, 85);
+            label6.Location = new Point(321, 106);
+            label6.Margin = new Padding(4, 0, 4, 0);
             label6.Name = "label6";
-            label6.Size = new Size(46, 20);
+            label6.Size = new Size(56, 25);
             label6.TabIndex = 14;
             label6.Text = "SL trả";
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(26, 41);
+            label8.Location = new Point(32, 51);
+            label8.Margin = new Padding(4, 0, 4, 0);
             label8.Name = "label8";
-            label8.Size = new Size(71, 20);
+            label8.Size = new Size(86, 25);
             label8.TabIndex = 12;
             label8.Text = "Mã phiếu";
             // 
             // txtid
             // 
             txtid.Enabled = false;
-            txtid.Location = new Point(110, 35);
+            txtid.Location = new Point(138, 44);
+            txtid.Margin = new Padding(4, 4, 4, 4);
             txtid.Name = "txtid";
-            txtid.Size = new Size(125, 27);
+            txtid.Size = new Size(155, 31);
             txtid.TabIndex = 10;
             // 
             // txtsl
             // 
-            txtsl.Location = new Point(341, 82);
+            txtsl.Location = new Point(426, 102);
+            txtsl.Margin = new Padding(4, 4, 4, 4);
             txtsl.Name = "txtsl";
-            txtsl.Size = new Size(125, 27);
+            txtsl.Size = new Size(155, 31);
             txtsl.TabIndex = 9;
             txtsl.KeyPress += txtsl_KeyPress;
             // 
             // txttien
             // 
             txttien.Enabled = false;
-            txttien.Location = new Point(341, 135);
+            txttien.Location = new Point(426, 169);
+            txttien.Margin = new Padding(4, 4, 4, 4);
             txttien.Name = "txttien";
-            txttien.Size = new Size(125, 27);
+            txttien.Size = new Size(155, 31);
             txttien.TabIndex = 8;
             txttien.Text = "0";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(257, 314);
+            label3.Location = new Point(321, 392);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(75, 20);
+            label3.Size = new Size(89, 25);
             label3.TabIndex = 6;
             label3.Text = "Trạng thái";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(257, 259);
+            label2.Location = new Point(321, 324);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(66, 20);
+            label2.Size = new Size(80, 25);
             label2.TabIndex = 5;
             label2.Text = "Ngày trả";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(257, 198);
+            label1.Location = new Point(321, 248);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(87, 20);
+            label1.Size = new Size(107, 25);
             label1.TabIndex = 4;
             label1.Text = "Ngày mượn";
             // 
             // txttrangthai
             // 
-            txttrangthai.Location = new Point(341, 311);
+            txttrangthai.Location = new Point(426, 389);
+            txttrangthai.Margin = new Padding(4, 4, 4, 4);
             txttrangthai.Name = "txttrangthai";
-            txttrangthai.Size = new Size(125, 27);
+            txttrangthai.Size = new Size(155, 31);
             txttrangthai.TabIndex = 1;
             // 
             // button4
             // 
             button4.AutoSize = true;
             button4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            button4.Location = new Point(450, 474);
+            button4.Location = new Point(562, 592);
+            button4.Margin = new Padding(4, 4, 4, 4);
             button4.Name = "button4";
-            button4.Size = new Size(126, 50);
+            button4.Size = new Size(158, 62);
             button4.TabIndex = 36;
             button4.Text = "Pay";
             button4.UseVisualStyleBackColor = true;
             // 
             // Phieutra
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1219, 903);
+            ClientSize = new Size(1524, 1050);
             Controls.Add(button4);
             Controls.Add(groupBox3);
             Controls.Add(groupBox5);
