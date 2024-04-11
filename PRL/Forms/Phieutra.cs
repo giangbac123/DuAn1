@@ -37,6 +37,7 @@ namespace PRL.Forms
         {
             LoadSach(_sach.GetAll());
             LoadData(_repos.GetAllPhieutra());
+            HDtraCTview.Rows.Clear();
         }
         private void LoadSach(dynamic data)
         {
@@ -132,9 +133,9 @@ namespace PRL.Forms
             deleteButtonColumn.UseColumnTextForButtonValue = true;
             HDtraCTview.Columns.Add(deleteButtonColumn);
             int stt = 1;
-            foreach (var x in data)
+            foreach (Phieutract x in _ct.GetAll())
             {
-                HDtraCTview.Rows.Add(stt++,x.Matract, x.Masach, x.Soluong, x.Ngaymuon, x.Ngaytra, x.Trangthai);
+                HDtraCTview.Rows.Add(stt++, x.Matract, x.Masach, x.Soluong, x.Ngaymuon, x.Ngaytra, x.Trangthai);
             }
         }
         private void HDtraCTview_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -215,34 +216,93 @@ namespace PRL.Forms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (txtcccd.Text == "" && txttenkh.Text == "")
+            DialogResult result = MessageBox.Show("Bạn có muốn tạo phiếu không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
             {
-                MessageBox.Show("Vui lòng nhập thông tin khách hàng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                if (txttenkh.Text != "")
+                if (txtcccd.Text == "" && txttenkh.Text == "")
                 {
-                    if (txtcccd.Text != "")
+                    MessageBox.Show("Vui lòng nhập thông tin khách hàng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    if (txttenkh.Text != "")
                     {
-                        if (txtcccd.Text.Length == 12)
+                        if (txtcccd.Text != "")
+                        {
+                            if (txtcccd.Text.Length == 12)
+                            {
+                                var thongtin = _muon.GetAllPhieumuon().Where(x => x.Tenkh == txttenkh.Text && x.Cccd == txtcccd.Text);
+                                if (thongtin != null)
+                                {
+                                    var a = _repos.AddHoaDon(new DAL.Models.Phieutra
+                                    {
+                                        Matra = RandomID(),
+                                        Tenkh = txttenkh.Text,
+                                        Cccd = txtcccd.Text
+                                    });
+                                    if (a)
+                                    {
+                                        MessageBox.Show("Tạo thông tin thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    }
+                                    else
+                                    {
+                                        return;
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Không tìm thấy thông tin của khách hàng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Nhập số thẻ CCCD không đúng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Vui lòng nhập số thẻ CCCD của khách hàng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vui lòng nhập tên khách hàng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Bạn có muốn sửa thông tin không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                if (txtcccd.Text == "" && txttenkh.Text == "")
+                {
+                    MessageBox.Show("Vui lòng nhập thông tin khách hàng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    if (txttenkh.Text != "")
+                    {
+                        if (txtcccd.Text != "")
                         {
                             var thongtin = _muon.GetAllPhieumuon().Where(x => x.Tenkh == txttenkh.Text && x.Cccd == txtcccd.Text);
                             if (thongtin != null)
                             {
-                                var a = _repos.AddHoaDon(new DAL.Models.Phieutra
+                                var a = _repos.UpdateHoaDon(txtid.Text, new DAL.Models.Phieutra
                                 {
-                                    Matra = RandomID(),
                                     Tenkh = txttenkh.Text,
                                     Cccd = txtcccd.Text
                                 });
                                 if (a)
                                 {
-                                    MessageBox.Show("Tạo thông tin thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    MessageBox.Show("Sửa thông tin thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 }
                                 else
                                 {
-                                    return;
+                                    MessageBox.Show("Vui lòng chọn hóa đơn!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                             }
                             else
@@ -252,53 +312,7 @@ namespace PRL.Forms
                         }
                         else
                         {
-                            MessageBox.Show("Nhập số thẻ CCCD không đúng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Vui lòng nhập số thẻ CCCD của khách hàng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Vui lòng nhập tên khách hàng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            if (txtcccd.Text == "" && txttenkh.Text == "")
-            {
-                MessageBox.Show("Vui lòng nhập thông tin khách hàng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                if (txttenkh.Text != "")
-                {
-                    if (txtcccd.Text != "")
-                    {
-                        var thongtin = _muon.GetAllPhieumuon().Where(x => x.Tenkh == txttenkh.Text && x.Cccd == txtcccd.Text);
-                        if (thongtin != null)
-                        {
-                            var a = _repos.UpdateHoaDon(txtid.Text, new DAL.Models.Phieutra
-                            {
-                                Tenkh = txttenkh.Text,
-                                Cccd = txtcccd.Text
-                            });
-                            if (a)
-                            {
-                                MessageBox.Show("Sửa thông tin thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                            else
-                            {
-                                MessageBox.Show("Vui lòng chọn hóa đơn!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("Không tìm thấy thông tin của khách hàng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Vui lòng nhập tên khách hàng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
@@ -306,133 +320,438 @@ namespace PRL.Forms
                         MessageBox.Show("Vui lòng nhập tên khách hàng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Vui lòng nhập tên khách hàng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
             }
+
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if(txtid.Text == "" && txtsach.Text == "" && txtsl.Text == "")
+            DialogResult result = MessageBox.Show("Bạn có muốn thêm thông tin không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
             {
-                MessageBox.Show("Vui lòng nhập thông tin khách hàng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                if (txtid.Text != "")
+                if (txtid.Text == "" && txtsach.Text == "" && txtsl.Text == "")
                 {
-                    if (txtsach.Text != "")
+                    MessageBox.Show("Vui lòng nhập thông tin khách hàng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    if (txtid.Text != "")
                     {
-                        if (txtsl.Text != "")
+                        if (txtsach.Text != "")
                         {
-                            if (dateTimePicker1.Value.Date <= dateTimePicker2.Value.Date)
+                            if (txtsl.Text != "")
                             {
-                                if (int.TryParse(txtsl.Text, out int soluong))
+                                if (dateTimePicker1.Value.Date <= dateTimePicker2.Value.Date)
                                 {
-                                    if (soluong > 0)
+                                    if (int.TryParse(txtsl.Text, out int soluong))
                                     {
-                                        var phieutract = new Phieutract
+                                        if (soluong > 0)
                                         {
-                                            Matra = txtid.Text,
-                                            Masach = txtsach.Text,
-                                            Soluong = soluong,
-                                            Trangthai = txttrangthai.Text,
-                                            Ngaymuon = dateTimePicker1.Value.Date,
-                                            Ngaytra = dateTimePicker2.Value.Date
-                                        };
-                                        var phieumuon = _muon.GetAllPhieumuon().Where(x => x.Cccd == txtcccd.Text && x.Tenkh == txttenkh.Text);
-                                        if (phieumuon != null)
-                                        {
-                                            foreach (var x in phieumuon)
+                                            var phieutract = new DAL.Models.Phieutract
                                             {
-                                                var phieumuonct = _muonct.GetAll().FirstOrDefault(a => a.Mamuon == x.Mamuon);
-                                                int soluongsachmuon = _muonct.GetAll().Where(a => a.Mamuon == x.Mamuon).Sum(x => x.Soluong);
-                                                if (phieumuonct != null)
+                                                Matra = txtid.Text,
+                                                Masach = txtsach.Text,
+                                                Soluong = soluong,
+                                                Ngaymuon = dateTimePicker1.Value.Date,
+                                                Ngaytra = DateTime.Today,
+                                                Trangthai = txttrangthai.Text
+                                            };
+                                            var phieumuon = _muon.GetAllPhieumuon().Where(x => x.Cccd == txtcccd.Text && x.Tenkh == txttenkh.Text && x.Trangthai != "Đã trả xong");
+                                            if (phieumuon.Any())
+                                            {
+                                                foreach (var muon in phieumuon)
                                                 {
-                                                    if (phieutract.Masach == phieumuonct.Masach && phieutract.Ngaymuon == phieumuonct.Ngaymuon)
+                                                    var phieumuonct = _muonct.GetAll().FirstOrDefault(x => x.Mamuon == muon.Mamuon && x.Masach == txtsach.Text && x.Ngaymuon == dateTimePicker1.Value.Date);
+                                                    var tongmuon = _muonct.GetAll().Where(x => x.Mamuon == muon.Mamuon);
+                                                    if (phieumuonct != null)
                                                     {
-                                                        if (soluong <= phieumuonct.Soluong)
+                                                        var checktrung = _ct.GetAll().FirstOrDefault(x => x.Matra == txtid.Text && x.Masach == txtsach.Text && x.Ngaymuon == dateTimePicker1.Value.Date);
+                                                        if (checktrung == null)
                                                         {
-                                                            var add = _ct.AddHoaDonCT(phieutract);
-                                                            if (add)
+                                                            if (soluong <= phieumuonct.Soluong)
                                                             {
-                                                                LoadDataCT(txtid.Text);
-                                                                txtsach.Text = txtsl.Text = txttrangthai.Text = "";
-                                                                dateTimePicker1.Value = dateTimePicker2.Value = DateTime.Today;
-                                                                var sach = _sach.GetBy(phieutract.Masach);
-                                                                if (sach != null)
+                                                                var add = _ct.AddHoaDonCT(phieutract);
+                                                                if (add)
                                                                 {
-                                                                    if (_sach.Update(phieutract.Masach, new DAL.Models.Sach
+                                                                    var sach = _sach.GetAll().FirstOrDefault(x => x.Masach == txtsach.Text);
+                                                                    if (sach != null)
                                                                     {
-                                                                        Soluong = sach.Sum(p => p.Soluong) + soluong
-                                                                    }))
-                                                                    {
-                                                                        MessageBox.Show("Thêm thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                                                    }
-                                                                }
-                                                                int soluongsachtra = _ct.GetByPhieutraCT(txtid.Text).Sum(p => p.Soluong);
-                                                                if (soluongsachtra == soluongsachmuon)
-                                                                {
-                                                                    MessageBox.Show("Khách hàng đã trả hết số lượng sách đã mượn! \nVui lòng trả lại thẻ CCCD cho khác hàng!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                                                    var up = _muon.UpdateHoaDon(x.Mamuon, new DAL.Models.Phieumuon
-                                                                    {
-                                                                        Trangthai = "Đã trả"
-                                                                    });
-                                                                    if (up)
-                                                                    {
-                                                                        return;
+                                                                        var updatesach = _sach.Update(txtsach.Text, new DAL.Models.Sach
+                                                                        {
+                                                                            Tensach = sach.Tensach,
+                                                                            Ngayxb = sach.Ngayxb,
+                                                                            Sotrang = sach.Sotrang,
+                                                                            Giaban = sach.Giaban,
+                                                                            Trangthai = sach.Trangthai,
+                                                                            Soluong = sach.Soluong + phieutract.Soluong
+                                                                        });
+                                                                        if (updatesach)
+                                                                        {
+                                                                            idCT -= idCT;
+                                                                            LoadDataCT(txtid.Text);
+                                                                            LoadSach(_sach.GetAll());
+                                                                            if (_ct.GetByPhieutraCT(txtid.Text).Sum(p => p.Soluong) == tongmuon.Sum(p => p.Soluong))
+                                                                            {
+                                                                                var updatemuon = _muon.UpdateHoaDon(muon.Mamuon, new DAL.Models.Phieumuon
+                                                                                {
+                                                                                    Tenkh = muon.Mamuon,
+                                                                                    Cccd = muon.Cccd,
+                                                                                    Trangthai = "Đã trả xong"
+                                                                                });
+                                                                                if (updatemuon)
+                                                                                {
+                                                                                    txtsach.Text = txtsl.Text = txttrangthai.Text = "";
+                                                                                    dateTimePicker1.Value = dateTimePicker2.Value = DateTime.Today;
+                                                                                    MessageBox.Show("Thêm thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                                                                    MessageBox.Show("Khách hàng đã trả lại toàn bộ sách trong hóa đơn mượn. Vui lòng nhân viên trả lại thẻ CCCD cho khác hàng!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                                                }
+
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                txtsach.Text = txtsl.Text = txttrangthai.Text = "";
+                                                                                dateTimePicker1.Value = dateTimePicker2.Value = DateTime.Today;
+                                                                                MessageBox.Show("Thêm thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                                                            }
+                                                                        }
                                                                     }
                                                                 }
                                                             }
                                                             else
                                                             {
-                                                                return;
+                                                                MessageBox.Show($"Bạn mượn {phieumuonct.Soluong.ToString()} quyển! Vui lòng nhập số lượng nhỏ hơn {phieumuonct.Soluong.ToString()} quyển!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                                             }
                                                         }
                                                         else
                                                         {
-                                                            MessageBox.Show("Bạn mượn " + phieumuonct.Soluong + "quyển! Vui lòng nhập nhỏ hơn hoặc bằng " + phieumuonct.Soluong + "!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                            if (soluong <= phieumuonct.Soluong - checktrung.Soluong)
+                                                            {
+                                                                var add = _ct.UpdateCT(checktrung.Matract, new Phieutract
+                                                                {
+                                                                    Matra = txtid.Text,
+                                                                    Masach = txtsach.Text,
+                                                                    Soluong = checktrung.Soluong + soluong,
+                                                                    Ngaymuon = dateTimePicker1.Value.Date,
+                                                                    Ngaytra = DateTime.Today,
+                                                                    Trangthai = txttrangthai.Text
+                                                                });
+                                                                if (add)
+                                                                {
+                                                                    var sach = _sach.GetAll().FirstOrDefault(x => x.Masach == txtsach.Text);
+                                                                    if (sach != null)
+                                                                    {
+                                                                        var updatesach = _sach.Update(txtsach.Text, new DAL.Models.Sach
+                                                                        {
+                                                                            Tensach = sach.Tensach,
+                                                                            Ngayxb = sach.Ngayxb,
+                                                                            Sotrang = sach.Sotrang,
+                                                                            Giaban = sach.Giaban,
+                                                                            Trangthai = sach.Trangthai,
+                                                                            Soluong = sach.Soluong + phieutract.Soluong
+                                                                        });
+                                                                        if (updatesach)
+                                                                        {
+                                                                            LoadSach(_sach.GetAll());
+                                                                            LoadDataCT(txtid.Text);
+                                                                            if (_ct.GetByPhieutraCT(txtid.Text).Sum(p => p.Soluong) == tongmuon.Sum(p => p.Soluong))
+                                                                            {
+                                                                                var updatemuon = _muon.UpdateHoaDon(muon.Mamuon, new DAL.Models.Phieumuon
+                                                                                {
+                                                                                    Tenkh = muon.Mamuon,
+                                                                                    Cccd = muon.Cccd,
+                                                                                    Trangthai = "Đã trả xong"
+                                                                                });
+                                                                                if (updatemuon)
+                                                                                {
+                                                                                    txtsach.Text = txtsl.Text = txttrangthai.Text = "";
+                                                                                    dateTimePicker1.Value = dateTimePicker2.Value = DateTime.Today;
+                                                                                    MessageBox.Show("Thêm thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                                                                    MessageBox.Show("Khách hàng đã trả lại toàn bộ sách trong hóa đơn mượn. Vui lòng nhân viên trả lại thẻ CCCD cho khác hàng!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                                                }
+
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                txtsach.Text = txtsl.Text = txttrangthai.Text = "";
+                                                                                dateTimePicker1.Value = dateTimePicker2.Value = DateTime.Today;
+                                                                                MessageBox.Show("Thêm thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                MessageBox.Show($"Vui lòng nhập số lượng nhỏ hơn hoặc bằng {phieumuonct.Soluong - checktrung.Soluong} vì bạn còn {phieumuonct.Soluong - checktrung.Soluong} quyển chưa trả!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                            }
                                                         }
+
+                                                        break;
                                                     }
-                                                    break;
+                                                    else
+                                                    {
+                                                        MessageBox.Show("Không tìm thấy thông tin chi tiết mượn!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                    }
                                                 }
+                                            }
+                                            else
+                                            {
+                                                MessageBox.Show("Khách hàng thanh toán xong hoặc chưa mượn sách!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                             }
                                         }
                                         else
                                         {
-                                            MessageBox.Show("Không có bất kì thông tin nào về người dùng này!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                            MessageBox.Show("Vui lòng số lượng lớn hơn 0!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                         }
                                     }
                                     else
                                     {
-                                        MessageBox.Show("Vui lòng số lượng lớn hơn không!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        MessageBox.Show("Vui lòng nhập số lượng bằng số nguyên!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     }
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Vui lòng nhập số lượng bằng số nguyên!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show("Vui lòng nhập ngày mượn nhỏ hưn hoặc bằng ngày trả!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("Vui lòng nhập ngày mượn nhỏ hưn hoặc bằng ngày trả!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show("Vui lòng nhập số lượng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                         else
                         {
-                            MessageBox.Show("Vui lòng nhập số lượng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Vui lòng chọn sách!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Vui lòng chọn sách!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Vui lòng chọn phiếu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+                }
+            }
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Bạn có muốn thêm thông tin không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                if (txtid.Text == "" && txtsach.Text == "" && txtsl.Text == "")
+                {
+                    MessageBox.Show("Vui lòng nhập thông tin khách hàng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    MessageBox.Show("Vui lòng chọn phiếu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (txtid.Text != "")
+                    {
+                        if (txtsach.Text != "")
+                        {
+                            if (txtsl.Text != "")
+                            {
+                                if (dateTimePicker1.Value.Date <= dateTimePicker2.Value.Date)
+                                {
+                                    if (int.TryParse(txtsl.Text, out int soluong))
+                                    {
+                                        if (soluong > 0)
+                                        {
+                                            var phieutract = new DAL.Models.Phieutract
+                                            {
+                                                Matra = txtid.Text,
+                                                Masach = txtsach.Text,
+                                                Soluong = soluong,
+                                                Ngaymuon = dateTimePicker1.Value.Date,
+                                                Ngaytra = DateTime.Today,
+                                                Trangthai = txttrangthai.Text
+                                            };
+                                            var phieumuon = _muon.GetAllPhieumuon().Where(x => x.Cccd == txtcccd.Text && x.Tenkh == txttenkh.Text && x.Trangthai != "Đã trả xong");
+                                            if (phieumuon.Any())
+                                            {
+                                                foreach (var muon in phieumuon)
+                                                {
+                                                    var phieumuonct = _muonct.GetAll().FirstOrDefault(x => x.Mamuon == muon.Mamuon && x.Masach == txtsach.Text && x.Ngaymuon == dateTimePicker1.Value.Date);
+                                                    var tongmuon = _muonct.GetAll().Where(x => x.Mamuon == muon.Mamuon);
+                                                    if (phieumuonct != null)
+                                                    {
+                                                        var thongtinmuon = _ct.GetAll().FirstOrDefault(x => x.Matract == idCT);
+                                                        var checktrung = _ct.GetAll().FirstOrDefault(x => x.Matra == txtid.Text && x.Masach == txtsach.Text && x.Ngaymuon ==dateTimePicker1.Value.Date);
+                                                        if (checktrung == null)
+                                                        {
+                                                            if (soluong <= phieumuonct.Soluong)
+                                                            {
+                                                                var add = _ct.UpdateCT(idCT, new Phieutract
+                                                                {
+                                                                    Matra = txtid.Text,
+                                                                    Masach = txtsach.Text,
+                                                                    Soluong = thongtinmuon.Soluong-thongtinmuon.Soluong + soluong,
+                                                                    Ngaymuon = dateTimePicker1.Value.Date,
+                                                                    Ngaytra = DateTime.Today,
+                                                                    Trangthai = txttrangthai.Text
+                                                                });
+                                                                if (add)
+                                                                {
+                                                                    var sach = _sach.GetAll().FirstOrDefault(x => x.Masach == txtsach.Text);
+                                                                    if (sach != null)
+                                                                    {
+                                                                        var updatesachcu = _sach.Update(txtsach.Text, new DAL.Models.Sach
+                                                                        {
+                                                                            Tensach = sach.Tensach,
+                                                                            Ngayxb = sach.Ngayxb,
+                                                                            Sotrang = sach.Sotrang,
+                                                                            Giaban = sach.Giaban,
+                                                                            Trangthai = sach.Trangthai,
+                                                                            Soluong = sach.Soluong - thongtinmuon.Soluong + phieutract.Soluong
+                                                                        });
+                                                                        var updatesachmoi = _sach.Update(txtsach.Text, new DAL.Models.Sach
+                                                                        {
+                                                                            Tensach = sach.Tensach,
+                                                                            Ngayxb = sach.Ngayxb,
+                                                                            Sotrang = sach.Sotrang,
+                                                                            Giaban = sach.Giaban,
+                                                                            Trangthai = sach.Trangthai,
+                                                                            Soluong = sach.Soluong - thongtinmuon.Soluong + phieutract.Soluong
+                                                                        });
+                                                                        if (updatesachcu)
+                                                                        {
+                                                                            LoadSach(_sach.GetAll());
+                                                                            LoadDataCT(txtid.Text);
+                                                                            if (_ct.GetByPhieutraCT(txtid.Text).Sum(p => p.Soluong) == tongmuon.Sum(p => p.Soluong))
+                                                                            {
+                                                                                var updatemuon = _muon.UpdateHoaDon(muon.Mamuon, new DAL.Models.Phieumuon
+                                                                                {
+                                                                                    Tenkh = muon.Mamuon,
+                                                                                    Cccd = muon.Cccd,
+                                                                                    Trangthai = "Đã trả xong"
+                                                                                });
+                                                                                if (updatemuon)
+                                                                                {
+                                                                                    txtsach.Text = txtsl.Text = txttrangthai.Text = "";
+                                                                                    dateTimePicker1.Value = dateTimePicker2.Value = DateTime.Today;
+                                                                                    MessageBox.Show("Sửa thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                                                                    MessageBox.Show("Khách hàng đã trả lại toàn bộ sách trong hóa đơn mượn. Vui lòng nhân viên trả lại thẻ CCCD cho khác hàng!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                                                }
+
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                txtsach.Text = txtsl.Text = txttrangthai.Text = "";
+                                                                                dateTimePicker1.Value = dateTimePicker2.Value = DateTime.Today;
+                                                                                MessageBox.Show("Sửa thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                MessageBox.Show($"Vui lòng nhập số lượng nhỏ hơn hoặc bằng {phieumuonct.Soluong - checktrung.Soluong} vì bạn còn {phieumuonct.Soluong - checktrung.Soluong} quyển chưa trả!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            if (soluong <= phieumuonct.Soluong)
+                                                            {
+                                                                var delete = _ct.DeleteCT(checktrung.Matract);
+                                                                if (delete)
+                                                                {
+                                                                    var add = _ct.AddHoaDonCT(phieutract);
+                                                                    if (add)
+                                                                    {
+                                                                        var sach = _sach.GetAll().FirstOrDefault(x => x.Masach == txtsach.Text);
+                                                                        if (sach != null)
+                                                                        {
+                                                                            var updatesach = _sach.Update(txtsach.Text, new DAL.Models.Sach
+                                                                            {
+                                                                                Tensach = sach.Tensach,
+                                                                                Ngayxb = sach.Ngayxb,
+                                                                                Sotrang = sach.Sotrang,
+                                                                                Giaban = sach.Giaban,
+                                                                                Trangthai = sach.Trangthai,
+                                                                                Soluong = sach.Soluong + phieutract.Soluong
+                                                                            });
+                                                                            if (updatesach)
+                                                                            {
+                                                                                LoadDataCT(txtid.Text);
+                                                                                LoadSach(_sach.GetAll());
+                                                                                idCT = 0;
+                                                                                if (_ct.GetByPhieutraCT(txtid.Text).Sum(p => p.Soluong) == tongmuon.Sum(p => p.Soluong))
+                                                                                {
+                                                                                    var updatemuon = _muon.UpdateHoaDon(muon.Mamuon, new DAL.Models.Phieumuon
+                                                                                    {
+                                                                                        Tenkh = muon.Mamuon,
+                                                                                        Cccd = muon.Cccd,
+                                                                                        Trangthai = "Đã trả xong"
+                                                                                    });
+                                                                                    if (updatemuon)
+                                                                                    {
+                                                                                        idCT -= idCT;
+                                                                                        txtsach.Text = txtsl.Text = txttrangthai.Text = "";
+                                                                                        dateTimePicker1.Value = dateTimePicker2.Value = DateTime.Today;
+                                                                                        MessageBox.Show("Sửa thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                                                                        MessageBox.Show("Khách hàng đã trả lại toàn bộ sách trong hóa đơn mượn. Vui lòng nhân viên trả lại thẻ CCCD cho khác hàng!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                                                    }
+
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    txtsach.Text = txtsl.Text = txttrangthai.Text = "";
+                                                                                    dateTimePicker1.Value = dateTimePicker2.Value = DateTime.Today;
+                                                                                    MessageBox.Show("Sửa thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                MessageBox.Show($"Bạn mượn {phieumuonct.Soluong.ToString()} quyển! Vui lòng nhập số lượng nhỏ hơn {phieumuonct.Soluong.ToString()} quyển!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                            }
+                                                        }
+
+                                                        break;
+                                                    }
+                                                    else
+                                                    {
+                                                        MessageBox.Show("Không tìm thấy thông tin chi tiết mượn!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                MessageBox.Show("Khách hàng thanh toán xong hoặc chưa mượn sách!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("Vui lòng số lượng lớn hơn 0!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Vui lòng nhập số lượng bằng số nguyên!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Vui lòng nhập ngày mượn nhỏ hưn hoặc bằng ngày trả!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Vui lòng nhập số lượng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Vui lòng chọn sách!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vui lòng chọn phiếu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }

@@ -21,9 +21,9 @@ namespace DAL.Repository
 
         }
 
-        public bool AddHoaDonCT(Phieutract pm)
+        public bool AddHoaDonCT(Phieutract ct)
         {
-            _context.Phieutracts.Add(pm);
+            _context.Phieutracts.Add(ct);
             _context.SaveChanges();
             return true;
         }
@@ -61,8 +61,8 @@ namespace DAL.Repository
                 a.Masach = ct.Masach;
                 a.Soluong = ct.Soluong;
                 a.Trangthai = ct.Trangthai;
-                a.Ngaymuon = a.Ngaymuon;
-                a.Ngaytra = a.Ngaytra;
+                a.Ngaymuon = ct.Ngaymuon;
+                a.Ngaytra = ct.Ngaytra;
                 _context.Phieutracts.Update(a);
                 _context.SaveChanges();
                 return true;
