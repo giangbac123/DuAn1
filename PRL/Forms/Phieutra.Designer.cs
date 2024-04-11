@@ -465,6 +465,7 @@
             Name = "Phieutra";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Hóa đơn trả";
+            Load += Phieutra_Load;
             ((System.ComponentModel.ISupportInitialize)HDtraView).EndInit();
             ((System.ComponentModel.ISupportInitialize)HDtraCTview).EndInit();
             groupBox5.ResumeLayout(false);

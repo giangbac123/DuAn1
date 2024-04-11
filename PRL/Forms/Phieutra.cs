@@ -23,5 +23,11 @@ namespace PRL.Forms
             this.username = username;
             pass = mk;
         }
+
+        private void Phieutra_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
