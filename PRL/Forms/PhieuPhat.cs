@@ -12,9 +12,19 @@ namespace PRL.Forms
 {
     public partial class PhieuPhat : Form
     {
-        public PhieuPhat()
+        string username, password , matra;
+
+        public PhieuPhat(string username, string password , string matra)
         {
             InitializeComponent();
+            this.matra = matra;
+            this.username = username;
+            this.password = password;
+        }
+
+        private void PhieuPhat_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -80,6 +80,7 @@
             // 
             // HDtraView
             // 
+            HDtraView.AllowUserToAddRows = false;
             HDtraView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             HDtraView.Location = new Point(6, 26);
             HDtraView.Name = "HDtraView";
@@ -92,6 +93,7 @@
             // 
             // HDtraCTview
             // 
+            HDtraCTview.AllowUserToAddRows = false;
             HDtraCTview.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             HDtraCTview.Location = new Point(9, 26);
             HDtraCTview.Name = "HDtraCTview";
@@ -230,6 +232,7 @@
             // 
             // SachView
             // 
+            SachView.AllowUserToAddRows = false;
             SachView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             SachView.Location = new Point(6, 80);
             SachView.Name = "SachView";

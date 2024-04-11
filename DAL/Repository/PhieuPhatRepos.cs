@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repository
 {
-    public class PhieuPhatRepos:IPhieuPhatRepos
+    public class PhieuPhatRepos : IPhieuPhatRepos
     {
         QLTHUVIENContext _context = new QLTHUVIENContext();
         public PhieuPhatRepos() { }
