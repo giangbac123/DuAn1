@@ -243,14 +243,14 @@ namespace PRL.Forms
         private void ViewSach_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int index = e.RowIndex;
-            var selected = ViewHD.Rows[index];
+            var selected = ViewSach.Rows[index];
             txtsach.Text = selected.Cells[1].Value.ToString();
         }
 
         private void ViewCT_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int index = e.RowIndex;
-            var selected = ViewHD.Rows[index];
+            var selected = ViewCT.Rows[index];
             txtsach.Text = selected.Cells[2].Value.ToString();
             txtsl.Text = selected.Cells[3].Value.ToString();
             dateTimePicker1.Value = (DateTime)selected.Cells[5].Value;
@@ -263,7 +263,7 @@ namespace PRL.Forms
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == ViewHD.Columns[7].Index)
             {
-                DataGridViewRow selectedRow = ViewHD.Rows[e.RowIndex];
+                DataGridViewRow selectedRow = ViewCT.Rows[e.RowIndex];
                 string soPhieu = selectedRow.Cells[1].Value.ToString();
                 var xoa = _repos.DeleteHoaDon(soPhieu);
                 if (xoa)
@@ -329,7 +329,7 @@ namespace PRL.Forms
 
                                                     if (sach)
                                                     {
-                                                        LoadHDCT(txtid.Text);
+                                                        LoadHDCT(_ct.GetByPhieumuonCT(txtid.Text));
                                                         id -= id;
                                                         MessageBox.Show("Sửa thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                                     }
@@ -361,7 +361,7 @@ namespace PRL.Forms
 
                                                     if (sach)
                                                     {
-                                                        LoadHDCT(txtid.Text);
+                                                        LoadHDCT(_ct.GetByPhieumuonCT(txtid.Text));
                                                         id -= id;
                                                         MessageBox.Show("Sửa thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                                     }
@@ -462,7 +462,7 @@ namespace PRL.Forms
                                                         });
                                                         if (sach2)
                                                         {
-                                                            LoadHDCT(txtid.Text);
+                                                            LoadHDCT(_ct.GetByPhieumuonCT(txtid.Text));
                                                             MessageBox.Show("Thêm thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                                         }
                                                     }
@@ -530,10 +530,8 @@ namespace PRL.Forms
                     int tiensach = (int)x.Giaban;
                     if (soNgay > 0 && soNgay <= 30)
                     {
-
                         if (ma != null)
                         {
-                            int tiensach = (int)ma.Giaban;
                             if (tiensach > 0 && tiensach <= 50000)
                             {
                                 txttien.Text = $"{int.Parse(txtsl.Text) * 1000 * soNgay}";
