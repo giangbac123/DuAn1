@@ -39,15 +39,12 @@
             textBox3 = new TextBox();
             textBox4 = new TextBox();
             textBox5 = new TextBox();
-            textBox6 = new TextBox();
             button1 = new Button();
             button2 = new Button();
             button3 = new Button();
             button4 = new Button();
             groupBox1 = new GroupBox();
-            groupBox2 = new GroupBox();
             dataGridView1 = new DataGridView();
-            dataGridView2 = new DataGridView();
             Column2 = new DataGridViewTextBoxColumn();
             Column6 = new DataGridViewTextBoxColumn();
             Cloumn3 = new DataGridViewTextBoxColumn();
@@ -55,14 +52,16 @@
             Column4 = new DataGridViewTextBoxColumn();
             Column1 = new DataGridViewTextBoxColumn();
             Column5 = new DataGridViewTextBoxColumn();
+            groupBox2 = new GroupBox();
+            dataGridView2 = new DataGridView();
             Column11 = new DataGridViewTextBoxColumn();
             Column7 = new DataGridViewTextBoxColumn();
             Column8 = new DataGridViewTextBoxColumn();
             Column9 = new DataGridViewTextBoxColumn();
             Column10 = new DataGridViewTextBoxColumn();
             groupBox1.SuspendLayout();
-            groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             SuspendLayout();
             // 
@@ -156,13 +155,6 @@
             textBox5.Size = new Size(125, 27);
             textBox5.TabIndex = 11;
             // 
-            // textBox6
-            // 
-            textBox6.Location = new Point(387, 99);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(125, 27);
-            textBox6.TabIndex = 12;
-            // 
             // button1
             // 
             button1.AutoSize = true;
@@ -210,16 +202,6 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Dữ liệu";
             // 
-            // groupBox2
-            // 
-            groupBox2.Controls.Add(dataGridView2);
-            groupBox2.Location = new Point(575, 154);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(401, 302);
-            groupBox2.TabIndex = 18;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Thông tin trả sách muộn";
-            // 
             // dataGridView1
             // 
             dataGridView1.AllowUserToAddRows = false;
@@ -232,19 +214,6 @@
             dataGridView1.RowTemplate.Height = 29;
             dataGridView1.Size = new Size(551, 276);
             dataGridView1.TabIndex = 0;
-            // 
-            // dataGridView2
-            // 
-            dataGridView2.AllowUserToAddRows = false;
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Columns.AddRange(new DataGridViewColumn[] { Column11, Column7, Column8, Column9, Column10 });
-            dataGridView2.Dock = DockStyle.Fill;
-            dataGridView2.Location = new Point(3, 23);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.RowHeadersWidth = 51;
-            dataGridView2.RowTemplate.Height = 29;
-            dataGridView2.Size = new Size(395, 276);
-            dataGridView2.TabIndex = 0;
             // 
             // Column2
             // 
@@ -295,6 +264,29 @@
             Column5.Name = "Column5";
             Column5.Width = 125;
             // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(dataGridView2);
+            groupBox2.Location = new Point(575, 154);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(401, 302);
+            groupBox2.TabIndex = 18;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Thông tin trả sách muộn";
+            // 
+            // dataGridView2
+            // 
+            dataGridView2.AllowUserToAddRows = false;
+            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.Columns.AddRange(new DataGridViewColumn[] { Column11, Column7, Column8, Column9, Column10 });
+            dataGridView2.Dock = DockStyle.Fill;
+            dataGridView2.Location = new Point(3, 23);
+            dataGridView2.Name = "dataGridView2";
+            dataGridView2.RowHeadersWidth = 51;
+            dataGridView2.RowTemplate.Height = 29;
+            dataGridView2.Size = new Size(395, 276);
+            dataGridView2.TabIndex = 0;
+            // 
             // Column11
             // 
             Column11.HeaderText = "STT";
@@ -341,7 +333,6 @@
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
-            Controls.Add(textBox6);
             Controls.Add(textBox5);
             Controls.Add(textBox4);
             Controls.Add(textBox3);
@@ -357,8 +348,8 @@
             Text = "PhieuPhat";
             Load += PhieuPhat_Load;
             groupBox1.ResumeLayout(false);
-            groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -376,7 +367,6 @@
         private TextBox textBox3;
         private TextBox textBox4;
         private TextBox textBox5;
-        private TextBox textBox6;
         private Button button1;
         private Button button2;
         private Button button3;

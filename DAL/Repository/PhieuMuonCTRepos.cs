@@ -18,7 +18,7 @@ namespace DAL.Repository
             _context = context;
         }
 
-        public bool AddHoaDonCT(string id, Phieumuonct ct)
+        public bool AddHoaDonCT(Phieumuonct ct)
         {
             _context.Phieumuoncts.Add(ct);
             _context.SaveChanges();

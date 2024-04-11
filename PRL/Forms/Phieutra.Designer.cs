@@ -56,12 +56,10 @@
             label9 = new Label();
             txtcccd = new TextBox();
             label4 = new Label();
-            label5 = new Label();
             label6 = new Label();
             label8 = new Label();
             txtid = new TextBox();
             txtsl = new TextBox();
-            txttien = new TextBox();
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
@@ -90,6 +88,7 @@
             HDtraView.TabIndex = 0;
             HDtraView.CellClick += HDtraView_CellClick;
             HDtraView.CellContentClick += HDtraView_CellContentClick;
+            HDtraView.EnabledChanged += txtsl_TextChanged;
             // 
             // HDtraCTview
             // 
@@ -103,6 +102,7 @@
             HDtraCTview.TabIndex = 1;
             HDtraCTview.CellClick += HDtraCTview_CellClick;
             HDtraCTview.CellContentClick += HDtraCTview_CellContentClick;
+            HDtraCTview.EnabledChanged += txtsl_TextChanged;
             // 
             // groupBox5
             // 
@@ -113,6 +113,7 @@
             groupBox5.TabIndex = 35;
             groupBox5.TabStop = false;
             groupBox5.Text = "Chi tiết hóa đơn:";
+            groupBox5.EnabledChanged += txtsl_TextChanged;
             // 
             // groupBox6
             // 
@@ -123,6 +124,7 @@
             groupBox6.TabIndex = 34;
             groupBox6.TabStop = false;
             groupBox6.Text = "Danh sách hóa đơn:";
+            groupBox6.EnabledChanged += txtsl_TextChanged;
             // 
             // btnClear
             // 
@@ -134,6 +136,8 @@
             btnClear.TabIndex = 33;
             btnClear.Text = "Hủy";
             btnClear.UseVisualStyleBackColor = true;
+            btnClear.EnabledChanged += txtsl_TextChanged;
+            btnClear.Click += btnClear_Click;
             // 
             // btnEdit
             // 
@@ -145,6 +149,7 @@
             btnEdit.TabIndex = 31;
             btnEdit.Text = "Update";
             btnEdit.UseVisualStyleBackColor = true;
+            btnEdit.EnabledChanged += txtsl_TextChanged;
             btnEdit.Click += btnEdit_Click;
             // 
             // btnAdd
@@ -157,6 +162,7 @@
             btnAdd.TabIndex = 30;
             btnAdd.Text = "New";
             btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.EnabledChanged += txtsl_TextChanged;
             btnAdd.Click += btnAdd_Click;
             // 
             // button1
@@ -169,6 +175,8 @@
             button1.TabIndex = 27;
             button1.Text = "Thoát";
             button1.UseVisualStyleBackColor = true;
+            button1.EnabledChanged += txtsl_TextChanged;
+            button1.Click += button1_Click;
             // 
             // menuStrip1
             // 
@@ -179,18 +187,23 @@
             menuStrip1.Size = new Size(1219, 28);
             menuStrip1.TabIndex = 25;
             menuStrip1.Text = "menuStrip1";
+            menuStrip1.EnabledChanged += txtsl_TextChanged;
             // 
             // phiếuMượnToolStripMenuItem
             // 
             phiếuMượnToolStripMenuItem.Name = "phiếuMượnToolStripMenuItem";
             phiếuMượnToolStripMenuItem.Size = new Size(102, 24);
             phiếuMượnToolStripMenuItem.Text = "Phiếu mượn";
+            phiếuMượnToolStripMenuItem.Click += phiếuMượnToolStripMenuItem_Click;
+            phiếuMượnToolStripMenuItem.EnabledChanged += txtsl_TextChanged;
             // 
             // phiếuTrảToolStripMenuItem
             // 
             phiếuTrảToolStripMenuItem.Name = "phiếuTrảToolStripMenuItem";
             phiếuTrảToolStripMenuItem.Size = new Size(81, 24);
             phiếuTrảToolStripMenuItem.Text = "Phiếu trả";
+            phiếuTrảToolStripMenuItem.Click += phiếuTrảToolStripMenuItem_Click;
+            phiếuTrảToolStripMenuItem.EnabledChanged += txtsl_TextChanged;
             // 
             // groupBox1
             // 
@@ -201,6 +214,7 @@
             groupBox1.TabIndex = 26;
             groupBox1.TabStop = false;
             groupBox1.Text = "Tìm kiếm";
+            groupBox1.EnabledChanged += txtsl_TextChanged;
             // 
             // btnTK
             // 
@@ -209,6 +223,7 @@
             btnTK.PlaceholderText = "Nhập thông tin tìm kiếm";
             btnTK.Size = new Size(500, 27);
             btnTK.TabIndex = 0;
+            btnTK.EnabledChanged += txtsl_TextChanged;
             btnTK.TextChanged += btnTK_TextChanged;
             // 
             // groupBox2
@@ -221,6 +236,7 @@
             groupBox2.TabIndex = 28;
             groupBox2.TabStop = false;
             groupBox2.Text = "Thông tin sách";
+            groupBox2.EnabledChanged += txtsl_TextChanged;
             // 
             // textBox1
             // 
@@ -229,6 +245,8 @@
             textBox1.PlaceholderText = "Nhập thông tin sách";
             textBox1.Size = new Size(358, 27);
             textBox1.TabIndex = 1;
+            textBox1.EnabledChanged += txtsl_TextChanged;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // SachView
             // 
@@ -241,6 +259,7 @@
             SachView.Size = new Size(592, 214);
             SachView.TabIndex = 0;
             SachView.CellClick += SachView_CellClick;
+            SachView.EnabledChanged += txtsl_TextChanged;
             // 
             // groupBox3
             // 
@@ -254,12 +273,10 @@
             groupBox3.Controls.Add(label9);
             groupBox3.Controls.Add(txtcccd);
             groupBox3.Controls.Add(label4);
-            groupBox3.Controls.Add(label5);
             groupBox3.Controls.Add(label6);
             groupBox3.Controls.Add(label8);
             groupBox3.Controls.Add(txtid);
             groupBox3.Controls.Add(txtsl);
-            groupBox3.Controls.Add(txttien);
             groupBox3.Controls.Add(label3);
             groupBox3.Controls.Add(label2);
             groupBox3.Controls.Add(label1);
@@ -270,6 +287,7 @@
             groupBox3.TabIndex = 7;
             groupBox3.TabStop = false;
             groupBox3.Text = "Thực hiện cho mượn";
+            groupBox3.EnabledChanged += txtsl_TextChanged;
             // 
             // txttenkh
             // 
@@ -277,6 +295,7 @@
             txttenkh.Name = "txttenkh";
             txttenkh.Size = new Size(125, 27);
             txttenkh.TabIndex = 34;
+            txttenkh.EnabledChanged += txtsl_TextChanged;
             txttenkh.KeyPress += txttenkh_KeyPress;
             // 
             // button2
@@ -289,6 +308,7 @@
             button2.TabIndex = 33;
             button2.Text = "Update";
             button2.UseVisualStyleBackColor = true;
+            button2.EnabledChanged += txtsl_TextChanged;
             button2.Click += button2_Click;
             // 
             // button3
@@ -301,30 +321,33 @@
             button3.TabIndex = 32;
             button3.Text = "Add";
             button3.UseVisualStyleBackColor = true;
+            button3.EnabledChanged += txtsl_TextChanged;
             button3.Click += button3_Click;
             // 
             // txtsach
             // 
-            txtsach.Enabled = false;
             txtsach.Location = new Point(341, 38);
             txtsach.Name = "txtsach";
             txtsach.Size = new Size(125, 27);
             txtsach.TabIndex = 26;
+            txtsach.EnabledChanged += txtsl_TextChanged;
             // 
             // dateTimePicker2
             // 
-            dateTimePicker2.Location = new Point(341, 254);
+            dateTimePicker2.Location = new Point(341, 198);
             dateTimePicker2.Name = "dateTimePicker2";
             dateTimePicker2.Size = new Size(125, 27);
             dateTimePicker2.TabIndex = 25;
+            dateTimePicker2.EnabledChanged += txtsl_TextChanged;
             // 
             // dateTimePicker1
             // 
             dateTimePicker1.CustomFormat = "dd/MM/yyyy";
-            dateTimePicker1.Location = new Point(341, 193);
+            dateTimePicker1.Location = new Point(341, 137);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(125, 27);
             dateTimePicker1.TabIndex = 24;
+            dateTimePicker1.EnabledChanged += txtsl_TextChanged;
             // 
             // label7
             // 
@@ -334,6 +357,7 @@
             label7.Size = new Size(63, 20);
             label7.TabIndex = 22;
             label7.Text = "Mã sách";
+            label7.EnabledChanged += txtsl_TextChanged;
             // 
             // label9
             // 
@@ -343,6 +367,7 @@
             label9.Size = new Size(68, 20);
             label9.TabIndex = 21;
             label9.Text = "Số CCCD";
+            label9.EnabledChanged += txtsl_TextChanged;
             // 
             // txtcccd
             // 
@@ -350,6 +375,7 @@
             txtcccd.Name = "txtcccd";
             txtcccd.Size = new Size(125, 27);
             txtcccd.TabIndex = 20;
+            txtcccd.EnabledChanged += txtsl_TextChanged;
             txtcccd.KeyPress += txtcccd_KeyPress;
             // 
             // label4
@@ -360,15 +386,7 @@
             label4.Size = new Size(78, 20);
             label4.TabIndex = 17;
             label4.Text = "Họ tên KH";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(257, 138);
-            label5.Name = "label5";
-            label5.Size = new Size(54, 20);
-            label5.TabIndex = 15;
-            label5.Text = "Phí thu";
+            label4.EnabledChanged += txtsl_TextChanged;
             // 
             // label6
             // 
@@ -378,6 +396,7 @@
             label6.Size = new Size(46, 20);
             label6.TabIndex = 14;
             label6.Text = "SL trả";
+            label6.EnabledChanged += txtsl_TextChanged;
             // 
             // label8
             // 
@@ -387,14 +406,15 @@
             label8.Size = new Size(71, 20);
             label8.TabIndex = 12;
             label8.Text = "Mã phiếu";
+            label8.EnabledChanged += txtsl_TextChanged;
             // 
             // txtid
             // 
-            txtid.Enabled = false;
             txtid.Location = new Point(110, 35);
             txtid.Name = "txtid";
             txtid.Size = new Size(125, 27);
             txtid.TabIndex = 10;
+            txtid.EnabledChanged += txtsl_TextChanged;
             // 
             // txtsl
             // 
@@ -402,50 +422,47 @@
             txtsl.Name = "txtsl";
             txtsl.Size = new Size(125, 27);
             txtsl.TabIndex = 9;
+            txtsl.EnabledChanged += txtsl_TextChanged;
+            txtsl.TextChanged += txtsl_TextChanged;
             txtsl.KeyPress += txtsl_KeyPress;
-            // 
-            // txttien
-            // 
-            txttien.Enabled = false;
-            txttien.Location = new Point(341, 135);
-            txttien.Name = "txttien";
-            txttien.Size = new Size(125, 27);
-            txttien.TabIndex = 8;
-            txttien.Text = "0";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(257, 314);
+            label3.Location = new Point(257, 258);
             label3.Name = "label3";
             label3.Size = new Size(75, 20);
             label3.TabIndex = 6;
             label3.Text = "Trạng thái";
+            label3.EnabledChanged += txtsl_TextChanged;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(257, 259);
+            label2.Location = new Point(257, 203);
             label2.Name = "label2";
             label2.Size = new Size(66, 20);
             label2.TabIndex = 5;
             label2.Text = "Ngày trả";
+            label2.EnabledChanged += txtsl_TextChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(257, 198);
+            label1.Location = new Point(257, 142);
             label1.Name = "label1";
             label1.Size = new Size(87, 20);
             label1.TabIndex = 4;
             label1.Text = "Ngày mượn";
+            label1.EnabledChanged += txtsl_TextChanged;
             // 
             // txttrangthai
             // 
-            txttrangthai.Location = new Point(341, 311);
+            txttrangthai.Location = new Point(341, 255);
             txttrangthai.Name = "txttrangthai";
             txttrangthai.Size = new Size(125, 27);
             txttrangthai.TabIndex = 1;
+            txttrangthai.EnabledChanged += txtsl_TextChanged;
             // 
             // button4
             // 
@@ -457,6 +474,7 @@
             button4.TabIndex = 36;
             button4.Text = "Pay";
             button4.UseVisualStyleBackColor = true;
+            button4.EnabledChanged += txtsl_TextChanged;
             button4.Click += button4_Click;
             // 
             // Phieutra
@@ -517,12 +535,10 @@
         private TextBox textBox1;
         private DataGridView SachView;
         private GroupBox groupBox3;
-        private Label label5;
         private Label label6;
         private Label label8;
         private TextBox txtid;
         private TextBox txtsl;
-        private TextBox txttien;
         private Label label3;
         private Label label2;
         private Label label1;

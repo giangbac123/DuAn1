@@ -9,7 +9,7 @@ namespace DAL.IRepository
 {
     internal interface IPhieuMuonCTRepos
     {
-        public bool AddHoaDonCT(string id, Phieumuonct ct);
+        public bool AddHoaDonCT(Phieumuonct ct);
 
 
         public bool DeleteCT(int id);

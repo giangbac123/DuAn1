@@ -40,24 +40,26 @@ namespace PRL.Forms
             textBox1 = new TextBox();
             ViewSach = new DataGridView();
             groupBox3 = new GroupBox();
-            button3 = new Button();
-            button4 = new Button();
-            label3 = new Label();
-            txtTrangthai = new TextBox();
-            dateTimePicker2 = new DateTimePicker();
-            dateTimePicker1 = new DateTimePicker();
-            comboBox1 = new ComboBox();
-            label4 = new Label();
+            txttien = new TextBox();
             label5 = new Label();
-            label6 = new Label();
+            txttenkh = new TextBox();
+            txtid = new TextBox();
+            button3 = new Button();
+            txttrangthai = new TextBox();
+            button4 = new Button();
+            label1 = new Label();
+            txtsach = new TextBox();
+            label2 = new Label();
+            dateTimePicker2 = new DateTimePicker();
+            label3 = new Label();
+            dateTimePicker1 = new DateTimePicker();
+            txtsl = new TextBox();
             label7 = new Label();
             label8 = new Label();
-            txtMaSach = new TextBox();
-            txtId = new TextBox();
-            txtSL = new TextBox();
-            txtTien = new TextBox();
-            label2 = new Label();
-            label1 = new Label();
+            label9 = new Label();
+            label6 = new Label();
+            txtcccd = new TextBox();
+            label4 = new Label();
             btnAdd = new Button();
             btnEdit = new Button();
             btnClear = new Button();
@@ -116,6 +118,7 @@ namespace PRL.Forms
             btnTK.PlaceholderText = "Nhập thông tin tìm kiếm";
             btnTK.Size = new Size(500, 27);
             btnTK.TabIndex = 0;
+            btnTK.TextChanged += btnTK_TextChanged;
             // 
             // button1
             // 
@@ -146,6 +149,7 @@ namespace PRL.Forms
             textBox1.PlaceholderText = "Nhập thông tin sách";
             textBox1.Size = new Size(358, 27);
             textBox1.TabIndex = 1;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // ViewSach
             // 
@@ -156,27 +160,30 @@ namespace PRL.Forms
             ViewSach.RowTemplate.Height = 29;
             ViewSach.Size = new Size(568, 164);
             ViewSach.TabIndex = 0;
+            ViewSach.CellClick += ViewSach_CellClick;
             // 
             // groupBox3
             // 
-            groupBox3.Controls.Add(button3);
-            groupBox3.Controls.Add(button4);
-            groupBox3.Controls.Add(label3);
-            groupBox3.Controls.Add(txtTrangthai);
-            groupBox3.Controls.Add(dateTimePicker2);
-            groupBox3.Controls.Add(dateTimePicker1);
-            groupBox3.Controls.Add(comboBox1);
-            groupBox3.Controls.Add(label4);
+            groupBox3.Controls.Add(txttien);
             groupBox3.Controls.Add(label5);
-            groupBox3.Controls.Add(label6);
+            groupBox3.Controls.Add(txttenkh);
+            groupBox3.Controls.Add(txtid);
+            groupBox3.Controls.Add(button3);
+            groupBox3.Controls.Add(txttrangthai);
+            groupBox3.Controls.Add(button4);
+            groupBox3.Controls.Add(label1);
+            groupBox3.Controls.Add(txtsach);
+            groupBox3.Controls.Add(label2);
+            groupBox3.Controls.Add(dateTimePicker2);
+            groupBox3.Controls.Add(label3);
+            groupBox3.Controls.Add(dateTimePicker1);
+            groupBox3.Controls.Add(txtsl);
             groupBox3.Controls.Add(label7);
             groupBox3.Controls.Add(label8);
-            groupBox3.Controls.Add(txtMaSach);
-            groupBox3.Controls.Add(txtId);
-            groupBox3.Controls.Add(txtSL);
-            groupBox3.Controls.Add(txtTien);
-            groupBox3.Controls.Add(label2);
-            groupBox3.Controls.Add(label1);
+            groupBox3.Controls.Add(label9);
+            groupBox3.Controls.Add(label6);
+            groupBox3.Controls.Add(txtcccd);
+            groupBox3.Controls.Add(label4);
             groupBox3.Location = new Point(644, 134);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(521, 336);
@@ -184,161 +191,180 @@ namespace PRL.Forms
             groupBox3.TabStop = false;
             groupBox3.Text = "Thực hiện cho mượn";
             // 
+            // txttien
+            // 
+            txttien.Enabled = false;
+            txttien.Location = new Point(338, 134);
+            txttien.Name = "txttien";
+            txttien.Size = new Size(125, 27);
+            txttien.TabIndex = 53;
+            txttien.Text = "0";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(248, 137);
+            label5.Name = "label5";
+            label5.Size = new Size(62, 20);
+            label5.TabIndex = 54;
+            label5.Text = "Tiền phí";
+            // 
+            // txttenkh
+            // 
+            txttenkh.Location = new Point(108, 86);
+            txttenkh.Name = "txttenkh";
+            txttenkh.Size = new Size(125, 27);
+            txttenkh.TabIndex = 52;
+            // 
+            // txtid
+            // 
+            txtid.Enabled = false;
+            txtid.Location = new Point(107, 34);
+            txtid.Name = "txtid";
+            txtid.Size = new Size(125, 27);
+            txtid.TabIndex = 40;
+            // 
             // button3
             // 
             button3.AutoSize = true;
             button3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            button3.Location = new Point(249, 270);
+            button3.Location = new Point(61, 270);
             button3.Name = "button3";
             button3.Size = new Size(126, 50);
-            button3.TabIndex = 24;
+            button3.TabIndex = 51;
             button3.Text = "Update";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
+            // txttrangthai
+            // 
+            txttrangthai.Location = new Point(338, 283);
+            txttrangthai.Name = "txttrangthai";
+            txttrangthai.Size = new Size(125, 27);
+            txttrangthai.TabIndex = 35;
             // 
             // button4
             // 
             button4.AutoSize = true;
             button4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            button4.Location = new Point(117, 270);
+            button4.Location = new Point(61, 184);
             button4.Name = "button4";
             button4.Size = new Size(126, 50);
-            button4.TabIndex = 23;
+            button4.TabIndex = 50;
             button4.Text = "Add";
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(245, 189);
+            label1.Name = "label1";
+            label1.Size = new Size(87, 20);
+            label1.TabIndex = 36;
+            label1.Text = "Ngày mượn";
+            // 
+            // txtsach
+            // 
+            txtsach.Enabled = false;
+            txtsach.Location = new Point(338, 37);
+            txtsach.Name = "txtsach";
+            txtsach.Size = new Size(125, 27);
+            txtsach.TabIndex = 49;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(245, 238);
+            label2.Name = "label2";
+            label2.Size = new Size(66, 20);
+            label2.TabIndex = 37;
+            label2.Text = "Ngày trả";
+            // 
+            // dateTimePicker2
+            // 
+            dateTimePicker2.Location = new Point(338, 233);
+            dateTimePicker2.Name = "dateTimePicker2";
+            dateTimePicker2.Size = new Size(125, 27);
+            dateTimePicker2.TabIndex = 48;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(30, 204);
+            label3.Location = new Point(245, 286);
             label3.Name = "label3";
             label3.Size = new Size(75, 20);
-            label3.TabIndex = 22;
+            label3.TabIndex = 38;
             label3.Text = "Trạng thái";
-            // 
-            // txtTrangthai
-            // 
-            txtTrangthai.Location = new Point(110, 201);
-            txtTrangthai.Name = "txtTrangthai";
-            txtTrangthai.Size = new Size(125, 27);
-            txtTrangthai.TabIndex = 21;
-            // 
-            // dateTimePicker2
-            // 
-            dateTimePicker2.Location = new Point(342, 199);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(125, 27);
-            dateTimePicker2.TabIndex = 20;
             // 
             // dateTimePicker1
             // 
-            dateTimePicker1.Location = new Point(342, 147);
+            dateTimePicker1.CustomFormat = "dd/MM/yyyy";
+            dateTimePicker1.Location = new Point(338, 184);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(125, 27);
-            dateTimePicker1.TabIndex = 19;
+            dateTimePicker1.TabIndex = 47;
             // 
-            // comboBox1
+            // txtsl
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(110, 97);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(125, 28);
-            comboBox1.TabIndex = 18;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(30, 100);
-            label4.Name = "label4";
-            label4.Size = new Size(75, 20);
-            label4.TabIndex = 17;
-            label4.Text = "Nhân viên";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(257, 100);
-            label5.Name = "label5";
-            label5.Size = new Size(64, 20);
-            label5.TabIndex = 15;
-            label5.Text = "Tiền cọc";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(258, 48);
-            label6.Name = "label6";
-            label6.Size = new Size(67, 20);
-            label6.TabIndex = 14;
-            label6.Text = "SL mượn";
+            txtsl.Location = new Point(338, 81);
+            txtsl.Name = "txtsl";
+            txtsl.Size = new Size(125, 27);
+            txtsl.TabIndex = 39;
+            txtsl.Text = "0";
+            txtsl.TextChanged += txtsl_TextChanged;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(30, 152);
+            label7.Location = new Point(248, 40);
             label7.Name = "label7";
             label7.Size = new Size(63, 20);
-            label7.TabIndex = 13;
+            label7.TabIndex = 46;
             label7.Text = "Mã sách";
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(30, 48);
+            label8.Location = new Point(23, 40);
             label8.Name = "label8";
             label8.Size = new Size(71, 20);
-            label8.TabIndex = 12;
+            label8.TabIndex = 41;
             label8.Text = "Mã phiếu";
             // 
-            // txtMaSach
+            // label9
             // 
-            txtMaSach.Enabled = false;
-            txtMaSach.Location = new Point(110, 149);
-            txtMaSach.Name = "txtMaSach";
-            txtMaSach.Size = new Size(125, 27);
-            txtMaSach.TabIndex = 11;
+            label9.AutoSize = true;
+            label9.Location = new Point(23, 141);
+            label9.Name = "label9";
+            label9.Size = new Size(68, 20);
+            label9.TabIndex = 45;
+            label9.Text = "Số CCCD";
             // 
-            // txtId
+            // label6
             // 
-            txtId.Enabled = false;
-            txtId.Location = new Point(110, 45);
-            txtId.Name = "txtId";
-            txtId.Size = new Size(125, 27);
-            txtId.TabIndex = 10;
+            label6.AutoSize = true;
+            label6.Location = new Point(248, 89);
+            label6.Name = "label6";
+            label6.Size = new Size(46, 20);
+            label6.TabIndex = 42;
+            label6.Text = "SL trả";
             // 
-            // txtSL
+            // txtcccd
             // 
-            txtSL.Location = new Point(342, 45);
-            txtSL.Name = "txtSL";
-            txtSL.Size = new Size(125, 27);
-            txtSL.TabIndex = 9;
-            txtSL.Text = "0";
+            txtcccd.Location = new Point(108, 134);
+            txtcccd.Name = "txtcccd";
+            txtcccd.Size = new Size(125, 27);
+            txtcccd.TabIndex = 44;
             // 
-            // txtTien
+            // label4
             // 
-            txtTien.Enabled = false;
-            txtTien.Location = new Point(342, 97);
-            txtTien.Name = "txtTien";
-            txtTien.Size = new Size(125, 27);
-            txtTien.TabIndex = 8;
-            txtTien.Text = "0";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(249, 204);
-            label2.Name = "label2";
-            label2.Size = new Size(66, 20);
-            label2.TabIndex = 5;
-            label2.Text = "Ngày trả";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(249, 152);
-            label1.Name = "label1";
-            label1.Size = new Size(87, 20);
-            label1.TabIndex = 4;
-            label1.Text = "Ngày mượn";
+            label4.AutoSize = true;
+            label4.Location = new Point(23, 89);
+            label4.Name = "label4";
+            label4.Size = new Size(78, 20);
+            label4.TabIndex = 43;
+            label4.Text = "Họ tên KH";
             // 
             // btnAdd
             // 
@@ -350,6 +376,7 @@ namespace PRL.Forms
             btnAdd.TabIndex = 8;
             btnAdd.Text = "New";
             btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
             // 
             // btnEdit
             // 
@@ -372,6 +399,7 @@ namespace PRL.Forms
             btnClear.TabIndex = 11;
             btnClear.Text = "Hủy";
             btnClear.UseVisualStyleBackColor = true;
+            btnClear.Click += btnClear_Click;
             // 
             // groupBox5
             // 
@@ -392,6 +420,8 @@ namespace PRL.Forms
             ViewCT.RowTemplate.Height = 29;
             ViewCT.Size = new Size(539, 299);
             ViewCT.TabIndex = 1;
+            ViewCT.CellClick += ViewCT_CellClick;
+            ViewCT.CellContentClick += ViewCT_CellContentClick;
             // 
             // groupBox6
             // 
@@ -412,6 +442,8 @@ namespace PRL.Forms
             ViewHD.RowTemplate.Height = 29;
             ViewHD.Size = new Size(556, 299);
             ViewHD.TabIndex = 0;
+            ViewHD.CellClick += ViewHD_CellClick;
+            ViewHD.CellContentClick += ViewHD_CellContentClick;
             // 
             // button2
             // 
@@ -477,30 +509,32 @@ namespace PRL.Forms
         private Button btnAdd;
         private Button btnEdit;
         private Button btnClear;
-        private Label label5;
-        private Label label6;
-        private Label label7;
-        private Label label8;
-        private TextBox txtMaSach;
-        private TextBox txtId;
-        private TextBox txtSL;
-        private TextBox txtTien;
-        private Label label2;
-        private Label label1;
         private DataGridView ViewSach;
         private TextBox textBox1;
         private GroupBox groupBox5;
         private DataGridView ViewCT;
         private GroupBox groupBox6;
         private DataGridView ViewHD;
-        private ComboBox comboBox1;
-        private Label label4;
-        private DateTimePicker dateTimePicker2;
-        private DateTimePicker dateTimePicker1;
-        private Label label3;
-        private TextBox txtTrangthai;
         private Button button2;
+        private TextBox txttenkh;
+        private TextBox txtid;
         private Button button3;
+        private TextBox txttrangthai;
         private Button button4;
+        private Label label1;
+        private TextBox txtsach;
+        private Label label2;
+        private DateTimePicker dateTimePicker2;
+        private Label label3;
+        private DateTimePicker dateTimePicker1;
+        private TextBox txtsl;
+        private Label label7;
+        private Label label8;
+        private Label label9;
+        private Label label6;
+        private TextBox txtcccd;
+        private Label label4;
+        private TextBox txttien;
+        private Label label5;
     }
 }

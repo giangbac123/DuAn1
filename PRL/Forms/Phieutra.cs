@@ -32,7 +32,7 @@ namespace PRL.Forms
             this.username = username;
             pass = mk;
         }
-
+        
         private void Phieutra_Load(object sender, EventArgs e)
         {
             LoadSach(_sach.GetAll());
@@ -133,7 +133,7 @@ namespace PRL.Forms
             deleteButtonColumn.UseColumnTextForButtonValue = true;
             HDtraCTview.Columns.Add(deleteButtonColumn);
             int stt = 1;
-            foreach (Phieutract x in _ct.GetAll())
+            foreach (Phieutract x in data)
             {
                 HDtraCTview.Rows.Add(stt++, x.Matract, x.Masach, x.Soluong, x.Ngaymuon, x.Ngaytra, x.Trangthai);
             }
@@ -359,7 +359,7 @@ namespace PRL.Forms
                                             var phieumuon = _muon.GetAllPhieumuon().Where(x => x.Cccd == txtcccd.Text && x.Tenkh == txttenkh.Text && x.Trangthai != "Đã trả xong");
                                             if (phieumuon.Any())
                                             {
-                                                
+
                                                 foreach (var muon in phieumuon)
                                                 {
                                                     var phieumuonct = _muonct.GetAll().FirstOrDefault(x => x.Mamuon == muon.Mamuon && x.Masach == txtsach.Text && x.Ngaymuon == dateTimePicker1.Value.Date);
@@ -624,7 +624,7 @@ namespace PRL.Forms
                                                         else
                                                         {
                                                             var checktrung = _ct.GetAll().FirstOrDefault(x => x.Matra == txtid.Text && x.Masach == txtsach.Text && x.Ngaymuon == dateTimePicker1.Value.Date);
-                                                            if(checktrung!= null)
+                                                            if (checktrung != null)
                                                             {
                                                                 if (soluong <= phieumuonct.Soluong)
                                                                 {
@@ -656,7 +656,7 @@ namespace PRL.Forms
                                                                             {
                                                                                 Matra = txtid.Text,
                                                                                 Masach = txtsach.Text,
-                                                                                Soluong = checktrung.Soluong+soluong,
+                                                                                Soluong = checktrung.Soluong + soluong,
                                                                                 Ngaymuon = dateTimePicker1.Value.Date,
                                                                                 Ngaytra = dateTimePicker2.Value.Date,
                                                                                 Trangthai = txttrangthai.Text
@@ -789,10 +789,88 @@ namespace PRL.Forms
             {
                 if (txtid.Text != "")
                 {
-                    PhieuPhat phieuPhat = new PhieuPhat(username, pass, txtid.Text);
-                    phieuPhat.Show();
-                    this.Hide();
+                    bool check = false;
+                    var phieumuon = _muon.GetAllPhieumuon().Where(x => x.Cccd == txtcccd.Text && x.Tenkh == txttenkh.Text && x.Trangthai != "Đã trả xong");
+                    if (phieumuon.Any())
+                    {
+                        foreach (var muon in phieumuon)
+                        {
+                            var phieumuonct = _muonct.GetAll().FirstOrDefault(x => x.Mamuon == muon.Mamuon && x.Masach == txtsach.Text && x.Ngaymuon == dateTimePicker1.Value.Date);
+                            var phieutract = _ct.GetByPhieutraCT(txtid.Text);
+                            foreach(var tra in phieutract)
+                            {
+                                if (tra.Ngaytra > phieumuonct.Ngaytra)
+                                {
+                                    check = true;
+                                }
+                                break;
+                            }
+
+                        }
+                        if (check)
+                        {
+                            MessageBox.Show("Khách hàng đã trả sách không đúng hạn. Vui lòng xử lý vi phạm", "Cảnh báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                            PhieuPhat phieuPhat = new PhieuPhat(username, pass, txtid.Text);
+                            phieuPhat.Show();
+                            this.Hide();
+
+                        }
+                    }
                 }
+                else
+                {
+                    MessageBox.Show("Vui lòng chọn phiếu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            LoadSach(_sach.GetBy(textBox1.Text));
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            btnTK.Text = textBox1.Text = txtcccd.Text = txtid.Text = txttenkh.Text = txttrangthai.Text = txtsach.Text = "";
+            dateTimePicker1.Value = dateTimePicker2.Value = DateTime.Today;
+            txtsl.Text = "0";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            NguoidungRepos _ng = new NguoidungRepos();
+            var a = _ng.GetAll().FirstOrDefault(x => (x.Mand == username || x.Email == username) && x.Matkhau == pass && x.Chucdanh == false);
+            if (a! == null)
+            {
+                GiaodienAdmin ad = new GiaodienAdmin(username, pass);
+                ad.Show();
+                this.Hide();
+            }
+            else
+            {
+                GiaodienNV ad = new GiaodienNV(username, pass);
+                ad.Show();
+                this.Hide();
+            }
+        }
+
+        private void phiếuMượnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Phieumuon phieumuon = new Phieumuon(username, pass);
+            phieumuon.Show();
+            this.Hide();
+        }
+
+        private void phiếuTrảToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtsl_TextChanged(object sender, EventArgs e)
+        {
+            if (txtsach.Text == "")
+            {
+                txtsl.Text = "0";
             }
         }
     }
