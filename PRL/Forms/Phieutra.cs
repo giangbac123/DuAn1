@@ -782,48 +782,6 @@ namespace PRL.Forms
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show("Bạn có muốn thanh toán không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                if (txtid.Text != "")
-                {
-                    bool check = false;
-                    var phieumuon = _muon.GetAllPhieumuon().Where(x => x.Cccd == txtcccd.Text && x.Tenkh == txttenkh.Text && x.Trangthai != "Đã trả xong");
-                    if (phieumuon.Any())
-                    {
-                        foreach (var muon in phieumuon)
-                        {
-                            var phieumuonct = _muonct.GetAll().FirstOrDefault(x => x.Mamuon == muon.Mamuon && x.Masach == txtsach.Text && x.Ngaymuon == dateTimePicker1.Value.Date);
-                            var phieutract = _ct.GetByPhieutraCT(txtid.Text);
-                            foreach(var tra in phieutract)
-                            {
-                                if (tra.Ngaytra > phieumuonct.Ngaytra)
-                                {
-                                    check = true;
-                                }
-                                break;
-                            }
-
-                        }
-                        if (check)
-                        {
-                            MessageBox.Show("Khách hàng đã trả sách không đúng hạn. Vui lòng xử lý vi phạm", "Cảnh báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-                            PhieuPhat phieuPhat = new PhieuPhat(username, pass, txtid.Text);
-                            phieuPhat.Show();
-                            this.Hide();
-
-                        }
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Vui lòng chọn phiếu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             LoadSach(_sach.GetBy(textBox1.Text));

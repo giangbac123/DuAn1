@@ -64,7 +64,6 @@
             label2 = new Label();
             label1 = new Label();
             txttrangthai = new TextBox();
-            button4 = new Button();
             ((System.ComponentModel.ISupportInitialize)HDtraView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)HDtraCTview).BeginInit();
             groupBox5.SuspendLayout();
@@ -464,25 +463,11 @@
             txttrangthai.TabIndex = 1;
             txttrangthai.EnabledChanged += txtsl_TextChanged;
             // 
-            // button4
-            // 
-            button4.AutoSize = true;
-            button4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            button4.Location = new Point(450, 474);
-            button4.Name = "button4";
-            button4.Size = new Size(126, 50);
-            button4.TabIndex = 36;
-            button4.Text = "Pay";
-            button4.UseVisualStyleBackColor = true;
-            button4.EnabledChanged += txtsl_TextChanged;
-            button4.Click += button4_Click;
-            // 
             // Phieutra
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1219, 903);
-            Controls.Add(button4);
             Controls.Add(groupBox3);
             Controls.Add(groupBox5);
             Controls.Add(groupBox6);
@@ -551,7 +536,6 @@
         private TextBox txtsach;
         private Button button2;
         private Button button3;
-        private Button button4;
         private TextBox txttenkh;
         private Label label9;
         private TextBox txtcccd;

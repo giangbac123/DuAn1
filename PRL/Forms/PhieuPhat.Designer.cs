@@ -45,20 +45,9 @@
             button4 = new Button();
             groupBox1 = new GroupBox();
             dataGridView1 = new DataGridView();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column6 = new DataGridViewTextBoxColumn();
-            Cloumn3 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column5 = new DataGridViewTextBoxColumn();
             groupBox2 = new GroupBox();
             dataGridView2 = new DataGridView();
-            Column11 = new DataGridViewTextBoxColumn();
-            Column7 = new DataGridViewTextBoxColumn();
-            Column8 = new DataGridViewTextBoxColumn();
-            Column9 = new DataGridViewTextBoxColumn();
-            Column10 = new DataGridViewTextBoxColumn();
+            textBox6 = new TextBox();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox2.SuspendLayout();
@@ -206,7 +195,6 @@
             // 
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column2, Column6, Cloumn3, Column3, Column4, Column1, Column5 });
             dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.Location = new Point(3, 23);
             dataGridView1.Name = "dataGridView1";
@@ -214,55 +202,6 @@
             dataGridView1.RowTemplate.Height = 29;
             dataGridView1.Size = new Size(551, 276);
             dataGridView1.TabIndex = 0;
-            // 
-            // Column2
-            // 
-            Column2.HeaderText = "Số hóa đơn";
-            Column2.MinimumWidth = 6;
-            Column2.Name = "Column2";
-            Column2.Width = 125;
-            // 
-            // Column6
-            // 
-            Column6.HeaderText = "Chức năng";
-            Column6.MinimumWidth = 6;
-            Column6.Name = "Column6";
-            Column6.Width = 125;
-            // 
-            // Cloumn3
-            // 
-            Cloumn3.HeaderText = "Mã sách";
-            Cloumn3.MinimumWidth = 6;
-            Cloumn3.Name = "Cloumn3";
-            Cloumn3.Width = 125;
-            // 
-            // Column3
-            // 
-            Column3.HeaderText = "Số lượng";
-            Column3.MinimumWidth = 6;
-            Column3.Name = "Column3";
-            Column3.Width = 125;
-            // 
-            // Column4
-            // 
-            Column4.HeaderText = "Tiền phạt";
-            Column4.MinimumWidth = 6;
-            Column4.Name = "Column4";
-            Column4.Width = 125;
-            // 
-            // Column1
-            // 
-            Column1.HeaderText = "STT";
-            Column1.MinimumWidth = 6;
-            Column1.Name = "Column1";
-            Column1.Width = 125;
-            // 
-            // Column5
-            // 
-            Column5.HeaderText = "Ghi chú";
-            Column5.MinimumWidth = 6;
-            Column5.Name = "Column5";
-            Column5.Width = 125;
             // 
             // groupBox2
             // 
@@ -272,13 +211,12 @@
             groupBox2.Size = new Size(401, 302);
             groupBox2.TabIndex = 18;
             groupBox2.TabStop = false;
-            groupBox2.Text = "Thông tin trả sách muộn";
+            groupBox2.Text = "Thông tin trả phiếu";
             // 
             // dataGridView2
             // 
             dataGridView2.AllowUserToAddRows = false;
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Columns.AddRange(new DataGridViewColumn[] { Column11, Column7, Column8, Column9, Column10 });
             dataGridView2.Dock = DockStyle.Fill;
             dataGridView2.Location = new Point(3, 23);
             dataGridView2.Name = "dataGridView2";
@@ -287,46 +225,19 @@
             dataGridView2.Size = new Size(395, 276);
             dataGridView2.TabIndex = 0;
             // 
-            // Column11
+            // textBox6
             // 
-            Column11.HeaderText = "STT";
-            Column11.MinimumWidth = 6;
-            Column11.Name = "Column11";
-            Column11.Width = 125;
-            // 
-            // Column7
-            // 
-            Column7.HeaderText = "Mã sách";
-            Column7.MinimumWidth = 6;
-            Column7.Name = "Column7";
-            Column7.Width = 125;
-            // 
-            // Column8
-            // 
-            Column8.HeaderText = "Số lượng";
-            Column8.MinimumWidth = 6;
-            Column8.Name = "Column8";
-            Column8.Width = 125;
-            // 
-            // Column9
-            // 
-            Column9.HeaderText = "Ngày mượn";
-            Column9.MinimumWidth = 6;
-            Column9.Name = "Column9";
-            Column9.Width = 125;
-            // 
-            // Column10
-            // 
-            Column10.HeaderText = "Ngày trả";
-            Column10.MinimumWidth = 6;
-            Column10.Name = "Column10";
-            Column10.Width = 125;
+            textBox6.Location = new Point(387, 121);
+            textBox6.Name = "textBox6";
+            textBox6.Size = new Size(125, 27);
+            textBox6.TabIndex = 19;
             // 
             // PhieuPhat
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(988, 504);
+            Controls.Add(textBox6);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(button4);
@@ -373,19 +284,8 @@
         private Button button4;
         private GroupBox groupBox1;
         private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column6;
-        private DataGridViewTextBoxColumn Cloumn3;
-        private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Column4;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column5;
         private GroupBox groupBox2;
         private DataGridView dataGridView2;
-        private DataGridViewTextBoxColumn Column11;
-        private DataGridViewTextBoxColumn Column7;
-        private DataGridViewTextBoxColumn Column8;
-        private DataGridViewTextBoxColumn Column9;
-        private DataGridViewTextBoxColumn Column10;
+        private TextBox textBox6;
     }
 }
