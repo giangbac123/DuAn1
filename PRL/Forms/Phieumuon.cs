@@ -246,7 +246,7 @@ namespace PRL.Forms
                 {
                     LoadData(_repos.GetAllPhieumuon());
                     ViewHD.Rows.Clear();
-                    MessageBox.Show("Xoá thông tin thành công!", "Thoong báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    MessageBox.Show("Xoá thông tin thành công!", "Thônng báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 }
                 else
                 {
@@ -313,74 +313,95 @@ namespace PRL.Forms
                             {
                                 if (int.TryParse(txtsl.Text, out int soluong))
                                 {
+                                    DateTime ngayBatDau = dateTimePicker1.Value.Date;
+                                    DateTime ngayKetThuc = dateTimePicker2.Value.Date;
+                                    TimeSpan khoangThoiGian = ngayKetThuc - ngayBatDau;
+                                    int soNgay = khoangThoiGian.Days;
                                     if (soluong > 0)
                                     {
                                         if (dateTimePicker1.Value.Date <= dateTimePicker2.Value.Date)
                                         {
-                                            var check = _ct.GetAll().FirstOrDefault(x => x.Mamuon == txtid.Text && x.Masach == txtsach.Text);
-                                            if (check == null)
+                                            if (soNgay <= 30)
                                             {
-                                                var add = _ct.AddHoaDonCT(new DAL.Models.Phieumuonct
+                                                var soluongmuon = _ct.GetByPhieumuonCT(txtid.Text).Sum(x => x.Soluong);
+                                                if (soluongmuon <= 5 && soluong <= 5- soluongmuon)
                                                 {
-                                                    Mamuon = txtid.Text,
-                                                    Masach = txtsach.Text,
-                                                    Soluong = soluong,
-                                                    Ngaymuon = dateTimePicker1.Value.Date,
-                                                    Ngaytra = dateTimePicker2.Value.Date,
-                                                    Tienphi = int.Parse(txttien.Text)
-                                                });
-                                                if (add)
-                                                {
-                                                    var masach = _sach.GetAll().FirstOrDefault(x => x.Masach == txtsach.Text);
-                                                    var sach = _sach.Update(txtsach.Text, new DAL.Models.Sach
+                                                    var check = _ct.GetAll().FirstOrDefault(x => x.Mamuon == txtid.Text && x.Masach == txtsach.Text);
+                                                    if (check == null)
                                                     {
-                                                        Tensach = masach.Tensach,
-                                                        Soluong = masach.Soluong - soluong,
-                                                        Ngayxb = masach.Ngayxb,
-                                                        Sotrang = masach.Sotrang,
-                                                        Giaban = masach.Giaban,
-                                                        Trangthai = masach.Trangthai,
-                                                    });
+                                                        var add = _ct.AddHoaDonCT(new DAL.Models.Phieumuonct
+                                                        {
+                                                            Mamuon = txtid.Text,
+                                                            Masach = txtsach.Text,
+                                                            Soluong = soluong,
+                                                            Ngaymuon = dateTimePicker1.Value.Date,
+                                                            Ngaytra = dateTimePicker2.Value.Date,
+                                                            Tienphi = int.Parse(txttien.Text)
+                                                        });
+                                                        if (add)
+                                                        {
+                                                            var masach = _sach.GetAll().FirstOrDefault(x => x.Masach == txtsach.Text);
+                                                            var sach = _sach.Update(txtsach.Text, new DAL.Models.Sach
+                                                            {
+                                                                Tensach = masach.Tensach,
+                                                                Soluong = masach.Soluong - soluong,
+                                                                Ngayxb = masach.Ngayxb,
+                                                                Sotrang = masach.Sotrang,
+                                                                Giaban = masach.Giaban,
+                                                                Trangthai = masach.Trangthai,
+                                                            });
 
-                                                    if (sach)
-                                                    {
-                                                        LoadHDCT(_ct.GetByPhieumuonCT(txtid.Text));
-                                                        id -= id;
-                                                        MessageBox.Show("Sửa thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                            if (sach)
+                                                            {
+                                                                LoadHDCT(_ct.GetByPhieumuonCT(txtid.Text));
+                                                                LoadSach(_sach.GetAll());
+                                                                id -= id;
+                                                                MessageBox.Show("Thêm thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                            }
+                                                        }
                                                     }
+                                                    else
+                                                    {
+                                                        var add = _ct.UpdateCT(check.Mamuonct, new DAL.Models.Phieumuonct
+                                                        {
+                                                            Mamuon = txtid.Text,
+                                                            Masach = txtsach.Text,
+                                                            Soluong = check.Soluong + soluong,
+                                                            Ngaymuon = dateTimePicker1.Value.Date,
+                                                            Ngaytra = dateTimePicker2.Value.Date,
+                                                            Tienphi = int.Parse(txttien.Text)
+                                                        });
+                                                        if (add)
+                                                        {
+                                                            var masach = _sach.GetAll().FirstOrDefault(x => x.Masach == txtsach.Text);
+                                                            var sach = _sach.Update(txtsach.Text, new DAL.Models.Sach
+                                                            {
+                                                                Tensach = masach.Tensach,
+                                                                Soluong = masach.Soluong - soluong,
+                                                                Ngayxb = masach.Ngayxb,
+                                                                Sotrang = masach.Sotrang,
+                                                                Giaban = masach.Giaban,
+                                                                Trangthai = masach.Trangthai,
+                                                            });
+
+                                                            if (sach)
+                                                            {
+                                                                LoadHDCT(_ct.GetByPhieumuonCT(txtid.Text));
+                                                                LoadSach(_sach.GetAll());
+                                                                id -= id;
+                                                                MessageBox.Show("Thêm thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    MessageBox.Show($"Bạn chỉ được phép mượn tổng tối đa 5 quyển!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                                 }
                                             }
                                             else
                                             {
-                                                var add = _ct.UpdateCT(check.Mamuonct, new DAL.Models.Phieumuonct
-                                                {
-                                                    Mamuon = txtid.Text,
-                                                    Masach = txtsach.Text,
-                                                    Soluong = check.Soluong + soluong,
-                                                    Ngaymuon = dateTimePicker1.Value.Date,
-                                                    Ngaytra = dateTimePicker2.Value.Date,
-                                                    Tienphi = int.Parse(txttien.Text)
-                                                });
-                                                if (add)
-                                                {
-                                                    var masach = _sach.GetAll().FirstOrDefault(x => x.Masach == txtsach.Text);
-                                                    var sach = _sach.Update(txtsach.Text, new DAL.Models.Sach
-                                                    {
-                                                        Tensach = masach.Tensach,
-                                                        Soluong = masach.Soluong - soluong,
-                                                        Ngayxb = masach.Ngayxb,
-                                                        Sotrang = masach.Sotrang,
-                                                        Giaban = masach.Giaban,
-                                                        Trangthai = masach.Trangthai,
-                                                    });
-
-                                                    if (sach)
-                                                    {
-                                                        LoadHDCT(_ct.GetByPhieumuonCT(txtid.Text));
-                                                        id -= id;
-                                                        MessageBox.Show("Sửa thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                                    }
-                                                }
+                                                MessageBox.Show("Vui lòng không mượn quá 30 ngày!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                             }
                                         }
                                         else
@@ -440,64 +461,130 @@ namespace PRL.Forms
                                     {
                                         if (dateTimePicker1.Value.Date <= dateTimePicker2.Value.Date)
                                         {
-                                            var check = _ct.GetAll().FirstOrDefault(x => x.Mamuon == txtid.Text && x.Masach == txtsach.Text);
-                                            if (check == null)
+                                            var phieumuonct = _ct.GetAll().FirstOrDefault(x => x.Mamuonct == id);
+                                            if (txtsach.Text == phieumuonct.Masach)
                                             {
-                                                var ct = _ct.GetAll().FirstOrDefault(x => x.Mamuonct == id);
-                                                var a = _ct.UpdateCT(id, new DAL.Models.Phieumuonct
+                                                var update = _ct.UpdateCT(phieumuonct.Mamuonct, new Phieumuonct
                                                 {
-                                                    Masach = txtsach.Text,
+                                                    Masach = phieumuonct.Masach,
                                                     Soluong = soluong,
+                                                    Tienphi = int.Parse(txttien.Text),
                                                     Ngaymuon = dateTimePicker1.Value.Date,
-                                                    Ngaytra = dateTimePicker2.Value.Date,
-                                                    Tienphi = int.Parse(txttien.Text)
+                                                    Ngaytra = dateTimePicker2.Value.Date
                                                 });
-                                                if (a)
+                                                if (update)
                                                 {
-                                                    var masach = _sach.GetAll().FirstOrDefault(x => x.Masach == txtsach.Text);
-                                                    var sach = _sach.Update(txtsach.Text, new DAL.Models.Sach
+                                                    var timsach = _sach.GetAll().FirstOrDefault(x=>x.Masach ==phieumuonct.Masach);
+                                                    var updatesoluong = _sach.Update(timsach.Masach, new DAL.Models.Sach
                                                     {
-                                                        Tensach = masach.Tensach,
-                                                        Soluong = masach.Soluong - soluong,
-                                                        Ngayxb = masach.Ngayxb,
-                                                        Sotrang = masach.Sotrang,
-                                                        Giaban = masach.Giaban,
-                                                        Trangthai = masach.Trangthai,
+                                                        Tensach = timsach.Tensach,
+                                                        Soluong = timsach.Soluong + phieumuonct.Soluong - soluong,
+                                                        Ngayxb = timsach.Ngayxb,
+                                                        Sotrang = timsach.Sotrang,
+                                                        Giaban = timsach.Giaban,
+                                                        Trangthai = timsach.Trangthai
                                                     });
-                                                    if (sach)
+                                                    if (updatesoluong)
                                                     {
-                                                        var sach2 = _sach.Update(masach.Masach, new DAL.Models.Sach
-                                                        {
-                                                            Tensach = masach.Tensach,
-                                                            Soluong = masach.Soluong + masach.Soluong - soluong,
-                                                            Ngayxb = masach.Ngayxb,
-                                                            Sotrang = masach.Sotrang,
-                                                            Giaban = masach.Giaban,
-                                                            Trangthai = masach.Trangthai,
-                                                        });
-                                                        if (sach2)
-                                                        {
-                                                            LoadHDCT(_ct.GetByPhieumuonCT(txtid.Text));
-                                                            MessageBox.Show("Thêm thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                                        }
+                                                        LoadSach(_sach.GetAll());
+                                                        LoadHDCT(_ct.GetByPhieumuonCT(txtid.Text));
+                                                        id -= id;
+                                                        MessageBox.Show("Sửa thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                                     }
                                                 }
                                             }
                                             else
                                             {
-                                                var ct = _ct.GetAll().FirstOrDefault(x => x.Mamuonct == id);
-                                                var up = _ct.UpdateCT(check.Mamuonct, new Phieumuonct
+                                                var checktrung = _ct.GetAll().FirstOrDefault(x => x.Mamuon == txtid.Text && x.Masach == txtsach.Text);
+                                                if (checktrung!=null)
                                                 {
-                                                    Masach = check.Masach,
-                                                    Soluong = check.Soluong - check.Soluong + soluong,
-                                                    Tienphi = int.Parse(txttien.Text),
-                                                    Ngaymuon = check.Ngaymuon,
-                                                    Ngaytra = check.Ngaytra,
-                                                });
-                                                if (up)
+                                                    var update = _ct.UpdateCT(checktrung.Mamuonct, new Phieumuonct
+                                                    {
+                                                        Masach = checktrung.Masach,
+                                                        Soluong = checktrung.Soluong + soluong,
+                                                        Tienphi = int.Parse(txttien.Text),
+                                                        Ngaymuon = dateTimePicker1.Value.Date,
+                                                        Ngaytra = dateTimePicker2.Value.Date
+                                                    });
+                                                    if (update)
+                                                    {
+                                                        var sachcu = _sach.GetAll().FirstOrDefault(x => x.Masach == checktrung.Masach);
+                                                        var updatesachcu = _sach.Update(checktrung.Masach, new DAL.Models.Sach
+                                                        {
+                                                            Tensach = sachcu.Tensach,
+                                                            Soluong = sachcu.Soluong - soluong,
+                                                            Ngayxb = sachcu.Ngayxb,
+                                                            Sotrang = sachcu.Sotrang,
+                                                            Giaban = sachcu.Giaban,
+                                                            Trangthai = sachcu.Trangthai
+                                                        });
+                                                        if (updatesachcu)
+                                                        {
+                                                            var sachmoi = _sach.GetAll().FirstOrDefault(x => x.Masach == phieumuonct.Masach);
+                                                            var updatesachmoi = _sach.Update(sachmoi.Masach, new DAL.Models.Sach
+                                                            {
+                                                                Tensach = sachmoi.Tensach,
+                                                                Soluong = sachmoi.Soluong + soluong,
+                                                                Ngayxb = sachmoi.Ngayxb,
+                                                                Sotrang = sachmoi.Sotrang,
+                                                                Giaban = sachmoi.Giaban,
+                                                                Trangthai = sachmoi.Trangthai
+                                                            });
+                                                            if (updatesachmoi)
+                                                            {
+                                                                LoadSach(_sach.GetAll());
+                                                                LoadHDCT(_ct.GetByPhieumuonCT(txtid.Text));
+                                                                
+                                                                id -= id;
+                                                                MessageBox.Show("Sửa thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                else
                                                 {
-                                                    LoadHDCT(_ct.GetByPhieumuonCT(txtid.Text));
-                                                    MessageBox.Show("Thêm thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                                    var add = _ct.AddHoaDonCT(new Phieumuonct
+                                                    {
+                                                        Mamuon = txtid.Text,
+                                                        Masach = txtsach.Text,
+                                                        Soluong = soluong,
+                                                        Ngaymuon = dateTimePicker1.Value.Date,
+                                                        Ngaytra = dateTimePicker2.Value.Date
+                                                    });
+                                                    if (add)
+                                                    {
+                                                        var sachcu = _sach.GetAll().FirstOrDefault(x => x.Masach == txtsach.Text);
+                                                        var updatesachcu = _sach.Update(txtsach.Text, new DAL.Models.Sach
+                                                        {
+                                                            Tensach = sachcu.Tensach,
+                                                            Soluong = sachcu.Soluong - soluong,
+                                                            Ngayxb = sachcu.Ngayxb,
+                                                            Sotrang = sachcu.Sotrang,
+                                                            Giaban = sachcu.Giaban,
+                                                            Trangthai = sachcu.Trangthai
+                                                        });
+                                                        if (updatesachcu)
+                                                        {
+                                                            var sachmoi = _sach.GetAll().FirstOrDefault(x => x.Masach == phieumuonct.Masach);
+                                                            var updatesachmoi = _sach.Update(sachmoi.Masach, new DAL.Models.Sach
+                                                            {
+                                                                Tensach = sachmoi.Tensach,
+                                                                Soluong = sachmoi.Soluong + soluong,
+                                                                Ngayxb = sachmoi.Ngayxb,
+                                                                Sotrang = sachmoi.Sotrang,
+                                                                Giaban = sachmoi.Giaban,
+                                                                Trangthai = sachmoi.Trangthai
+                                                            });
+                                                            if (updatesachmoi)
+                                                            {
+                                                                LoadSach(_sach.GetAll());
+                                                                LoadHDCT(_ct.GetByPhieumuonCT(txtid.Text));
+
+                                                                id -= id;
+                                                                MessageBox.Show("Sửa thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                                            }
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
@@ -552,77 +639,84 @@ namespace PRL.Forms
             int soNgay = khoangThoiGian.Days;
             if (txtsach.Text != "")
             {
-                var ma = _sach.GetBy(txtsach.Text);
-                foreach (var x in ma)
+                if ((int.TryParse(txtsl.Text,out int sl)))
                 {
-                    int tiensach = (int)x.Giaban;
-                    if (soNgay > 0 && soNgay <= 30)
+                    var ma = _sach.GetBy(txtsach.Text);
+                    foreach (var x in ma)
                     {
-                        if (ma != null)
+                        int tiensach = (int)x.Giaban;
+                        if (soNgay > 0 && soNgay <= 30)
                         {
-                            if (tiensach > 0 && tiensach <= 50000)
+                            if (ma != null)
                             {
-                                txttien.Text = $"{int.Parse(txtsl.Text) * 1000 * soNgay}";
+                                if (tiensach > 0 && tiensach <= 50000)
+                                {
+                                    txttien.Text = $"{int.Parse(txtsl.Text) * 1000 * soNgay}";
+                                }
+                                else if (tiensach > 50000 && tiensach <= 100000)
+                                {
+                                    txttien.Text = $"{int.Parse(txtsl.Text) * 2000 * soNgay}";
+                                }
+                                else if (tiensach > 100000 && tiensach <= 500000)
+                                {
+                                    txttien.Text = $"{int.Parse(txtsl.Text) * 5000 * soNgay}";
+                                }
+                                else if (tiensach > 500000 && tiensach <= 1000000)
+                                {
+                                    txttien.Text = $"{int.Parse(txtsl.Text) * 10000 * soNgay}";
+                                }
+                                else if (tiensach > 1000000)
+                                {
+                                    txttien.Text = $"{int.Parse(txtsl.Text) * 20000 * soNgay}";
+                                }
                             }
-                            else if (tiensach > 50000 && tiensach <= 100000)
+                            else
                             {
-                                txttien.Text = $"{int.Parse(txtsl.Text) * 2000 * soNgay}";
-                            }
-                            else if (tiensach > 100000 && tiensach <= 500000)
-                            {
-                                txttien.Text = $"{int.Parse(txtsl.Text) * 5000 * soNgay}";
-                            }
-                            else if (tiensach > 500000 && tiensach <= 1000000)
-                            {
-                                txttien.Text = $"{int.Parse(txtsl.Text) * 10000 * soNgay}";
-                            }
-                            else if (tiensach > 1000000)
-                            {
-                                txttien.Text = $"{int.Parse(txtsl.Text) * 20000 * soNgay}";
+                                txttien.Text = "0";
                             }
                         }
-                        else
+                        else if (soNgay == 0)
                         {
-                            txttien.Text = "0";
-                        }
-                    }
-                    else if (soNgay == 0)
-                    {
-                        if (ma != null)
-                        {
+                            if (ma != null)
+                            {
 
-                            if (tiensach > 0 && tiensach <= 50000)
-                            {
-                                txttien.Text = $"{int.Parse(txtsl.Text) * 1000}";
+                                if (tiensach > 0 && tiensach <= 50000)
+                                {
+                                    txttien.Text = $"{int.Parse(txtsl.Text) * 1000}";
+                                }
+                                else if (tiensach > 50000 && tiensach <= 100000)
+                                {
+                                    txttien.Text = $"{int.Parse(txtsl.Text) * 2000}";
+                                }
+                                else if (tiensach > 100000 && tiensach <= 500000)
+                                {
+                                    txttien.Text = $"{int.Parse(txtsl.Text) * 5000}";
+                                }
+                                else if (tiensach > 500000 && tiensach <= 1000000)
+                                {
+                                    txttien.Text = $"{int.Parse(txtsl.Text) * 10000}";
+                                }
+                                else if (tiensach > 1000000)
+                                {
+                                    txttien.Text = $"{int.Parse(txtsl.Text) * 20000}";
+                                }
                             }
-                            else if (tiensach > 50000 && tiensach <= 100000)
+                            else
                             {
-                                txttien.Text = $"{int.Parse(txtsl.Text) * 2000}";
-                            }
-                            else if (tiensach > 100000 && tiensach <= 500000)
-                            {
-                                txttien.Text = $"{int.Parse(txtsl.Text) * 5000}";
-                            }
-                            else if (tiensach > 500000 && tiensach <= 1000000)
-                            {
-                                txttien.Text = $"{int.Parse(txtsl.Text) * 10000}";
-                            }
-                            else if (tiensach > 1000000)
-                            {
-                                txttien.Text = $"{int.Parse(txtsl.Text) * 20000}";
+                                txttien.Text = "0";
                             }
                         }
                         else
                         {
                             txttien.Text = "0";
                         }
-                    }
-                    else
-                    {
-                        txttien.Text = "0";
                     }
                 }
-
+                else
+                {
+                    txtsl.Text = "0";
+                    txttien.Text = "0";
+                }
             }
             else
             {
