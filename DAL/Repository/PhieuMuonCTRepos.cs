@@ -59,7 +59,8 @@ namespace DAL.Repository
                 a.Soluong = ct.Soluong;
                 a.Ngaymuon = ct.Ngaymuon;
                 a.Ngaytra = ct.Ngaytra;
-                _context.Phieumuoncts.Remove(a);
+                a.Tienphi = ct.Tienphi;
+                _context.Phieumuoncts.Update(a);
                 _context.SaveChanges();
                 return true;
             }

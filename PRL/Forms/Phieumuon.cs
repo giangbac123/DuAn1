@@ -296,328 +296,236 @@ namespace PRL.Forms
 
         private void button4_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Bạn có muộn tạo thông tin không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
+            DateTime startDate = dateTimePicker1.Value.Date;
+            DateTime endDate = dateTimePicker2.Value.Date;
+            TimeSpan difference = endDate - startDate;
+            int numberOfDays = (int)difference.TotalDays;
+            if(numberOfDays > 0)
             {
-                if (txtid.Text == "" && txtsach.Text == "" && txtsl.Text == "")
+                if(numberOfDays <= 30)
                 {
-                    MessageBox.Show("Vui lòng nhập thông tin!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    if (txtid.Text != "")
+                    if (int.TryParse(txtsl.Text, out int sl) && int.TryParse(txttien.Text, out int tien))
                     {
-                        if (txtsach.Text != "")
+                        if (sl > 0)
                         {
-                            if (txtsl.Text != "")
+                            if (_ct.GetByPhieumuonCT(txtid.Text) == null && _ct.GetByPhieumuonCT(txtid.Text).Count() == 0)
                             {
-                                if (int.TryParse(txtsl.Text, out int soluong))
+                                if (sl <= 5)
                                 {
-                                    DateTime ngayBatDau = dateTimePicker1.Value.Date;
-                                    DateTime ngayKetThuc = dateTimePicker2.Value.Date;
-                                    TimeSpan khoangThoiGian = ngayKetThuc - ngayBatDau;
-                                    int soNgay = khoangThoiGian.Days;
-                                    if (soluong > 0)
+                                    if (MessageBox.Show("Khách hàng muốn mượn sách thì sẽ phải giao nộp căn cước công dân cho thu quầy và cửa hàng sẽ giữ đến khi khách hàng hoàn toàn tất cả đủ số lượng sách đã mượn!", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                                     {
-                                        if (dateTimePicker1.Value.Date <= dateTimePicker2.Value.Date)
+                                        var a = _ct.AddHoaDonCT(new Phieumuonct
                                         {
-                                            if (soNgay <= 30)
+                                            Mamuon = txtid.Text,
+                                            Masach = txtsach.Text,
+                                            Soluong = int.Parse(txtsl.Text),
+                                            Ngaymuon = dateTimePicker1.Value.Date,
+                                            Ngaytra = dateTimePicker2.Value.Date,
+                                            Tienphi = tien
+                                        });
+                                        if (a)
+                                        {
+                                            var sach = _sach.GetAll().FirstOrDefault(x => x.Masach == txtsach.Text);
+                                            var editsach = _sach.Update(txtsach.Text, new DAL.Models.Sach
                                             {
-                                                var soluongmuon = _ct.GetByPhieumuonCT(txtid.Text).Sum(x => x.Soluong);
-                                                if (soluongmuon <= 5)
-                                                {
-                                                    var check = _ct.GetAll().FirstOrDefault(x => x.Mamuon == txtid.Text && x.Masach == txtsach.Text);
-                                                    if (check == null)
-                                                    {
-                                                        var add = _ct.AddHoaDonCT(new DAL.Models.Phieumuonct
-                                                        {
-                                                            Mamuon = txtid.Text,
-                                                            Masach = txtsach.Text,
-                                                            Soluong = soluong,
-                                                            Ngaymuon = dateTimePicker1.Value.Date,
-                                                            Ngaytra = dateTimePicker2.Value.Date,
-                                                            Tienphi = int.Parse(txttien.Text)
-                                                        });
-                                                        if (add)
-                                                        {
-                                                            var masach = _sach.GetAll().FirstOrDefault(x => x.Masach == txtsach.Text);
-                                                            var sach = _sach.Update(txtsach.Text, new DAL.Models.Sach
-                                                            {
-                                                                Tensach = masach.Tensach,
-                                                                Soluong = masach.Soluong - soluong,
-                                                                Ngayxb = masach.Ngayxb,
-                                                                Sotrang = masach.Sotrang,
-                                                                Giaban = masach.Giaban,
-                                                                Trangthai = masach.Trangthai,
-                                                            });
-
-                                                            if (sach)
-                                                            {
-                                                                LoadHDCT(_ct.GetByPhieumuonCT(txtid.Text));
-                                                                LoadSach(_sach.GetAll());
-                                                                id -= id;
-                                                                MessageBox.Show("Thêm thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                                            }
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        var add = _ct.UpdateCT(check.Mamuonct, new DAL.Models.Phieumuonct
-                                                        {
-                                                            Mamuon = txtid.Text,
-                                                            Masach = txtsach.Text,
-                                                            Soluong = check.Soluong + soluong,
-                                                            Ngaymuon = dateTimePicker1.Value.Date,
-                                                            Ngaytra = dateTimePicker2.Value.Date,
-                                                            Tienphi = int.Parse(txttien.Text)
-                                                        });
-                                                        if (add)
-                                                        {
-                                                            var masach = _sach.GetAll().FirstOrDefault(x => x.Masach == txtsach.Text);
-                                                            var sach = _sach.Update(txtsach.Text, new DAL.Models.Sach
-                                                            {
-                                                                Tensach = masach.Tensach,
-                                                                Soluong = masach.Soluong - soluong,
-                                                                Ngayxb = masach.Ngayxb,
-                                                                Sotrang = masach.Sotrang,
-                                                                Giaban = masach.Giaban,
-                                                                Trangthai = masach.Trangthai,
-                                                            });
-
-                                                            if (sach)
-                                                            {
-                                                                LoadHDCT(_ct.GetByPhieumuonCT(txtid.Text));
-                                                                LoadSach(_sach.GetAll());
-                                                                id -= id;
-                                                                MessageBox.Show("Thêm thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    MessageBox.Show($"Bạn chỉ được phép mượn tổng tối đa 5 quyển!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                                }
-                                            }
-                                            else
+                                                Tensach = sach.Tensach,
+                                                Soluong = sach.Soluong - sl,
+                                                Ngayxb = sach.Ngayxb,
+                                                Sotrang = sach.Sotrang,
+                                                Giaban = sach.Giaban,
+                                                Trangthai = sach.Trangthai
+                                            });
+                                            if (editsach)
                                             {
-                                                MessageBox.Show("Vui lòng không mượn quá 30 ngày!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                LoadSach(_sach.GetAll());
+                                                LoadHDCT(_ct.GetByPhieumuonCT(txtid.Text));
+                                                txtsach.Text = "";
+                                                txtsl.Text = txttien.Text = "0";
+                                                dateTimePicker1.Value = dateTimePicker2.Value = DateTime.Today;
+                                                MessageBox.Show("Thêm thông tin thành công1!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                                             }
                                         }
-                                        else
-                                        {
-                                            MessageBox.Show("Vui lòng nhập ngày mượn phải nhỏ hơn hoặc bằng ngày trả!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                        }
                                     }
-                                    else
-                                    {
-                                        MessageBox.Show("Vui lòng nhập số lượng lớn hơn 0!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    }
+
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Vui lòng nhập số lượng là số nguyên!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show("Bạn chỉ được mượn tổng tất cả tối đa 5 quyển!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("Vui lòng nhập số lượng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                var tongmuon = _ct.GetByPhieumuonCT(txtid.Text).Sum(x => x.Soluong);
+                                if (tongmuon <= 5 && sl <= 5 - tongmuon)
+                                {
+                                    var check = _ct.GetAll().FirstOrDefault(x => x.Mamuon == txtid.Text && x.Masach == txtsach.Text);
+                                    if (check == null)
+                                    {
+                                        var a = _ct.AddHoaDonCT(new Phieumuonct
+                                        {
+                                            Mamuon = txtid.Text,
+                                            Masach = txtsach.Text,
+                                            Soluong = int.Parse(txtsl.Text),
+                                            Ngaymuon = dateTimePicker1.Value.Date,
+                                            Ngaytra = dateTimePicker2.Value.Date,
+                                            Tienphi = tien
+                                        });
+                                        if (a)
+                                        {
+                                            var sach = _sach.GetAll().FirstOrDefault(x => x.Masach == txtsach.Text);
+                                            var editsach = _sach.Update(txtsach.Text, new DAL.Models.Sach
+                                            {
+                                                Tensach = sach.Tensach,
+                                                Soluong = sach.Soluong - sl,
+                                                Ngayxb = sach.Ngayxb,
+                                                Sotrang = sach.Sotrang,
+                                                Giaban = sach.Giaban,
+                                                Trangthai = sach.Trangthai
+                                            });
+                                            if (editsach)
+                                            {
+                                                LoadSach(_sach.GetAll());
+                                                LoadHDCT(_ct.GetByPhieumuonCT(txtid.Text));
+                                                txtsach.Text = "";
+                                                txtsl.Text = txttien.Text = "0";
+                                                dateTimePicker1.Value = dateTimePicker2.Value = DateTime.Today;
+                                                MessageBox.Show("Thêm thông tin thành công2!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        var a = _ct.UpdateCT(check.Mamuonct, new Phieumuonct
+                                        {
+                                            Mamuon = txtid.Text,
+                                            Masach = txtsach.Text,
+                                            Soluong = check.Soluong + sl,
+                                            Tienphi = check.Tienphi + tien,
+                                            Ngaymuon = dateTimePicker1.Value.Date,
+                                            Ngaytra = dateTimePicker2.Value.Date
+                                        });
+                                        if (a)
+                                        {
+                                            var sach = _sach.GetAll().FirstOrDefault(x => x.Masach == txtsach.Text);
+                                            var editsach = _sach.Update(txtsach.Text, new DAL.Models.Sach
+                                            {
+                                                Tensach = sach.Tensach,
+                                                Soluong = sach.Soluong - int.Parse(txtsl.Text),
+                                                Ngayxb = sach.Ngayxb,
+                                                Sotrang = sach.Sotrang,
+                                                Giaban = sach.Giaban,
+                                                Trangthai = sach.Trangthai
+                                            });
+                                            if (editsach)
+                                            {
+                                                LoadSach(_sach.GetAll());
+                                                LoadHDCT(_ct.GetByPhieumuonCT(txtid.Text));
+                                                txtsach.Text = "";
+                                                txtsl.Text = txttien.Text = "0";
+                                                dateTimePicker1.Value = dateTimePicker2.Value = DateTime.Today;
+                                                MessageBox.Show("Thêm thông tin thành công3!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Bạn chỉ được mượn tổng tất cả tối đa 5 quyển!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
                             }
+
                         }
                         else
                         {
-                            MessageBox.Show("Vui lòng chọn sách!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Vui lòng nhập số lượng là nguyên lớn hơn 0!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Vui lòng chọn phiếu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Vui lòng nhập số lượng là dạng số!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Khách hàng chỉ được phép mượn không quá 30 ngày", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-
+            else
+            {
+                MessageBox.Show("Vui lòng nhập ngày mượn nhỏ hơn hoặc bằng ngày trả!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Bạn có muốn sửa thông tin không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
+            int sl = int.Parse(txtsl.Text);
+            var idct = _ct.GetAll().FirstOrDefault(x => x.Mamuonct == id);
+            if(idct!=null)
             {
-                if (txtid.Text == "" && txtsach.Text == "" && txtsl.Text == "")
+                if(txtsach.Text == idct.Masach)
                 {
-                    MessageBox.Show("Vui lòng nhập thông tin!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    if (txtid.Text != "")
+                    var check = _ct.GetAll().FirstOrDefault(x => x.Mamuon == txtid.Text && x.Masach == txtsach.Text);
+                    if(check!=null)
                     {
-                        if (txtsach.Text != "")
+                        var update = _ct.UpdateCT(check.Mamuonct, new Phieumuonct
                         {
-                            if (txtsl.Text != "")
+                            Masach = check.Masach,
+                            Soluong = check.Soluong+sl,
+                            Ngaymuon = check.Ngaymuon,
+                            Ngaytra = check.Ngaytra,
+                            Tienphi = check.Tienphi +int.Parse(txttien.Text)
+                        });
+                        if (update)
+                        {
+                            var sach1  = _sach.GetAll().FirstOrDefault(x=>x.Masach == check.Masach);
+                            if(sach1!=null)
                             {
-                                if (int.TryParse(txtsl.Text, out int soluong))
+                                var updatesach1 = _sach.Update(sach1.Masach, new DAL.Models.Sach
                                 {
-                                    if (soluong > 0)
+                                    Tensach = sach1.Tensach,
+                                    Soluong = sach1.Soluong - int.Parse(txtsl.Text),
+                                    Ngayxb = sach1.Ngayxb,
+                                    Sotrang = sach1.Sotrang,
+                                    Giaban = sach1.Giaban,
+                                    Trangthai = sach1.Trangthai
+                                });
+                                if (updatesach1)
+                                {
+                                    var sach2 = _sach.GetAll().FirstOrDefault(x => x.Masach == txtsach.Text);
+                                    var updatesach2 = _sach.Update(sach1.Masach, new DAL.Models.Sach
                                     {
-                                        if (dateTimePicker1.Value.Date <= dateTimePicker2.Value.Date)
-                                        {
-                                            var phieumuonct = _ct.GetAll().FirstOrDefault(x => x.Mamuonct == id);
-                                            if (txtsach.Text == phieumuonct.Masach)
-                                            {
-                                                var update = _ct.UpdateCT(phieumuonct.Mamuonct, new Phieumuonct
-                                                {
-                                                    Masach = phieumuonct.Masach,
-                                                    Soluong = soluong,
-                                                    Tienphi = int.Parse(txttien.Text),
-                                                    Ngaymuon = dateTimePicker1.Value.Date,
-                                                    Ngaytra = dateTimePicker2.Value.Date
-                                                });
-                                                if (update)
-                                                {
-                                                    var timsach = _sach.GetAll().FirstOrDefault(x=>x.Masach ==phieumuonct.Masach);
-                                                    var updatesoluong = _sach.Update(timsach.Masach, new DAL.Models.Sach
-                                                    {
-                                                        Tensach = timsach.Tensach,
-                                                        Soluong = timsach.Soluong + phieumuonct.Soluong - soluong,
-                                                        Ngayxb = timsach.Ngayxb,
-                                                        Sotrang = timsach.Sotrang,
-                                                        Giaban = timsach.Giaban,
-                                                        Trangthai = timsach.Trangthai
-                                                    });
-                                                    if (updatesoluong)
-                                                    {
-                                                        LoadSach(_sach.GetAll());
-                                                        LoadHDCT(_ct.GetByPhieumuonCT(txtid.Text));
-                                                        id -= id;
-                                                        MessageBox.Show("Sửa thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                                    }
-                                                }
-                                            }
-                                            else
-                                            {
-                                                var checktrung = _ct.GetAll().FirstOrDefault(x => x.Mamuon == txtid.Text && x.Masach == txtsach.Text);
-                                                if (checktrung!=null)
-                                                {
-                                                    var update = _ct.UpdateCT(checktrung.Mamuonct, new Phieumuonct
-                                                    {
-                                                        Masach = checktrung.Masach,
-                                                        Soluong = checktrung.Soluong + soluong,
-                                                        Tienphi = int.Parse(txttien.Text),
-                                                        Ngaymuon = dateTimePicker1.Value.Date,
-                                                        Ngaytra = dateTimePicker2.Value.Date
-                                                    });
-                                                    if (update)
-                                                    {
-                                                        var sachcu = _sach.GetAll().FirstOrDefault(x => x.Masach == checktrung.Masach);
-                                                        var updatesachcu = _sach.Update(checktrung.Masach, new DAL.Models.Sach
-                                                        {
-                                                            Tensach = sachcu.Tensach,
-                                                            Soluong = sachcu.Soluong - soluong,
-                                                            Ngayxb = sachcu.Ngayxb,
-                                                            Sotrang = sachcu.Sotrang,
-                                                            Giaban = sachcu.Giaban,
-                                                            Trangthai = sachcu.Trangthai
-                                                        });
-                                                        if (updatesachcu)
-                                                        {
-                                                            var sachmoi = _sach.GetAll().FirstOrDefault(x => x.Masach == phieumuonct.Masach);
-                                                            var updatesachmoi = _sach.Update(sachmoi.Masach, new DAL.Models.Sach
-                                                            {
-                                                                Tensach = sachmoi.Tensach,
-                                                                Soluong = sachmoi.Soluong + soluong,
-                                                                Ngayxb = sachmoi.Ngayxb,
-                                                                Sotrang = sachmoi.Sotrang,
-                                                                Giaban = sachmoi.Giaban,
-                                                                Trangthai = sachmoi.Trangthai
-                                                            });
-                                                            if (updatesachmoi)
-                                                            {
-                                                                LoadSach(_sach.GetAll());
-                                                                LoadHDCT(_ct.GetByPhieumuonCT(txtid.Text));
-                                                                
-                                                                id -= id;
-                                                                MessageBox.Show("Sửa thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    var add = _ct.AddHoaDonCT(new Phieumuonct
-                                                    {
-                                                        Mamuon = txtid.Text,
-                                                        Masach = txtsach.Text,
-                                                        Soluong = soluong,
-                                                        Ngaymuon = dateTimePicker1.Value.Date,
-                                                        Ngaytra = dateTimePicker2.Value.Date
-                                                    });
-                                                    if (add)
-                                                    {
-                                                        var sachcu = _sach.GetAll().FirstOrDefault(x => x.Masach == txtsach.Text);
-                                                        var updatesachcu = _sach.Update(txtsach.Text, new DAL.Models.Sach
-                                                        {
-                                                            Tensach = sachcu.Tensach,
-                                                            Soluong = sachcu.Soluong - soluong,
-                                                            Ngayxb = sachcu.Ngayxb,
-                                                            Sotrang = sachcu.Sotrang,
-                                                            Giaban = sachcu.Giaban,
-                                                            Trangthai = sachcu.Trangthai
-                                                        });
-                                                        if (updatesachcu)
-                                                        {
-                                                            var sachmoi = _sach.GetAll().FirstOrDefault(x => x.Masach == phieumuonct.Masach);
-                                                            var updatesachmoi = _sach.Update(sachmoi.Masach, new DAL.Models.Sach
-                                                            {
-                                                                Tensach = sachmoi.Tensach,
-                                                                Soluong = sachmoi.Soluong + soluong,
-                                                                Ngayxb = sachmoi.Ngayxb,
-                                                                Sotrang = sachmoi.Sotrang,
-                                                                Giaban = sachmoi.Giaban,
-                                                                Trangthai = sachmoi.Trangthai
-                                                            });
-                                                            if (updatesachmoi)
-                                                            {
-                                                                LoadSach(_sach.GetAll());
-                                                                LoadHDCT(_ct.GetByPhieumuonCT(txtid.Text));
-
-                                                                id -= id;
-                                                                MessageBox.Show("Sửa thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        else
-                                        {
-                                            MessageBox.Show("Vui lòng nhập ngày mượn phải nhỏ hơn hoặc bằng ngày trả!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                        }
-                                    }
-                                    else
+                                        Tensach = sach2.Tensach,
+                                        Soluong = sach2.Soluong + check.Soluong,
+                                        Ngayxb = sach2.Ngayxb,
+                                        Sotrang = sach2.Sotrang,
+                                        Giaban = sach2.Giaban,
+                                        Trangthai = sach2.Trangthai
+                                    });
+                                    if(updatesach2)
                                     {
-                                        MessageBox.Show("Vui lòng nhập số lượng lớn hơn 0!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        LoadSach(_sach.GetAll());
+                                        LoadHDCT(_ct.GetByPhieumuonCT(txtid.Text));
+                                        txtsach.Text = "";
+                                        txtsl.Text = txttien.Text = "0";
+                                        _ct.DeleteCT(id);
+                                        id -= id;
+                                        dateTimePicker1.Value = dateTimePicker2.Value = DateTime.Today;
+                                        MessageBox.Show("Sửa thông tin thành công3!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     }
                                 }
-                                else
-                                {
-                                    MessageBox.Show("Vui lòng nhập số lượng là số nguyên!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                }
                             }
-                            else
-                            {
-                                MessageBox.Show("Vui lòng nhập số lượng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("Vui lòng chọn sách!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Vui lòng chọn phiếu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                     }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn phiếu hóa đơn!","Lỗi",MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
