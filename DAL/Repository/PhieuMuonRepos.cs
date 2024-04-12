@@ -34,7 +34,7 @@ namespace DAL.Repository
             var b = _context.Phieumuoncts.FirstOrDefault(x => x.Mamuon == id);
             if (a!=null)
             {
-                if (b != null)
+                if (b == null)
                 {
                     _context.Phieumuons.Remove(a);
                     _context.SaveChanges();

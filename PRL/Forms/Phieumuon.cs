@@ -324,7 +324,7 @@ namespace PRL.Forms
                                             if (soNgay <= 30)
                                             {
                                                 var soluongmuon = _ct.GetByPhieumuonCT(txtid.Text).Sum(x => x.Soluong);
-                                                if (soluongmuon <= 5 && soluong <= 5- soluongmuon)
+                                                if (soluongmuon <= 5)
                                                 {
                                                     var check = _ct.GetAll().FirstOrDefault(x => x.Mamuon == txtid.Text && x.Masach == txtsach.Text);
                                                     if (check == null)

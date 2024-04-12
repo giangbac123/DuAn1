@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL.Repository;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,6 +26,19 @@ namespace PRL.Forms
         private void PhieuPhat_Load(object sender, EventArgs e)
         {
 
+        }
+        private void LoadPhieuTra()
+        {
+            dataGridView2.Rows.Clear();
+            dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView2.ColumnCount = 7;
+            int stt = 1;
+            PhieuTraCTRepos phieuTraCTRepos = new PhieuTraCTRepos();
+            var a = phieuTraCTRepos.GetAll();
+            foreach(var x in a)
+            {
+                dataGridView2.Rows.Add(stt++,x.Matra,x.Masach,x.Soluong,x.Ngaytra,x.Ngaymuon);
+            }
         }
     }
 }

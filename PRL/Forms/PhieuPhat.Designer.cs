@@ -48,6 +48,7 @@
             groupBox2 = new GroupBox();
             dataGridView2 = new DataGridView();
             textBox6 = new TextBox();
+            comboBox1 = new ComboBox();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox2.SuspendLayout();
@@ -111,6 +112,7 @@
             // 
             // textBox1
             // 
+            textBox1.Enabled = false;
             textBox1.Location = new Point(113, 27);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(125, 27);
@@ -227,16 +229,26 @@
             // 
             // textBox6
             // 
-            textBox6.Location = new Point(387, 121);
+            textBox6.Location = new Point(387, 133);
             textBox6.Name = "textBox6";
             textBox6.Size = new Size(125, 27);
             textBox6.TabIndex = 19;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "Trả muộn", "Hỏng sách", "Bẩn sách", "Mất sách", "Khác" });
+            comboBox1.Location = new Point(387, 99);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(125, 28);
+            comboBox1.TabIndex = 20;
             // 
             // PhieuPhat
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(988, 504);
+            Controls.Add(comboBox1);
             Controls.Add(textBox6);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
@@ -287,5 +299,6 @@
         private GroupBox groupBox2;
         private DataGridView dataGridView2;
         private TextBox textBox6;
+        private ComboBox comboBox1;
     }
 }

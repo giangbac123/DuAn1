@@ -66,8 +66,6 @@
             TenSach_Texbox = new TextBox();
             label2 = new Label();
             groupBox1 = new GroupBox();
-            txtMaVach = new TextBox();
-            label11 = new Label();
             NgayXuatBan_Date = new DateTimePicker();
             label6 = new Label();
             groupBox6.SuspendLayout();
@@ -435,8 +433,6 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(txtMaVach);
-            groupBox1.Controls.Add(label11);
             groupBox1.Controls.Add(NgayXuatBan_Date);
             groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(Giatxt);
@@ -457,23 +453,6 @@
             groupBox1.TabIndex = 11;
             groupBox1.TabStop = false;
             groupBox1.Text = "Nhập Thông Tin";
-            // 
-            // txtMaVach
-            // 
-            txtMaVach.BorderStyle = BorderStyle.FixedSingle;
-            txtMaVach.Location = new Point(149, 311);
-            txtMaVach.Name = "txtMaVach";
-            txtMaVach.Size = new Size(204, 27);
-            txtMaVach.TabIndex = 43;
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Location = new Point(11, 313);
-            label11.Name = "label11";
-            label11.Size = new Size(67, 20);
-            label11.TabIndex = 42;
-            label11.Text = "Mã vạch:";
             // 
             // NgayXuatBan_Date
             // 
