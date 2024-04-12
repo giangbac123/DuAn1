@@ -49,14 +49,14 @@ namespace PRL.Forms
             string password = textBox3.Text;
             if (username != "" && password != "")
             {
-                if (_repos.Login(username, password,true))
+                if (_repos.Login(username, password, true))
                 {
-                    GiaodienAdmin gd = new GiaodienAdmin(username,password);
+                    GiaodienAdmin gd = new GiaodienAdmin(username, password);
                     gd.Show();
                     this.Hide();
                     MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                else if (_repos.Login(username, password,false))
+                else if (_repos.Login(username, password, false))
                 {
                     GiaodienNV gd = new GiaodienNV(username, password);
                     gd.Show();

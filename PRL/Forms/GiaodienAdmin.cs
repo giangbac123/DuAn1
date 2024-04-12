@@ -107,12 +107,12 @@ namespace PRL.Forms
 
         private void button12_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-            
+
         }
     }
 }

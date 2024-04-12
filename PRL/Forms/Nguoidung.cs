@@ -231,7 +231,7 @@ namespace PRL.Forms
                 var a = _repos.GetById(textBox1.Text);
                 LoadData(a);
             }
-            
+
         }
 
         private void button4_Click(object sender, EventArgs e)

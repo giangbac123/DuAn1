@@ -41,9 +41,10 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(251, 32);
+            label1.Location = new Point(314, 40);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(182, 81);
+            label1.Size = new Size(216, 96);
             label1.TabIndex = 0;
             label1.Text = "Login";
             label1.Click += label1_Click;
@@ -51,29 +52,32 @@
             // txtEmail
             // 
             txtEmail.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            txtEmail.Location = new Point(184, 141);
+            txtEmail.Location = new Point(230, 176);
+            txtEmail.Margin = new Padding(4, 4, 4, 4);
             txtEmail.Name = "txtEmail";
             txtEmail.PlaceholderText = "Email";
-            txtEmail.Size = new Size(318, 38);
+            txtEmail.Size = new Size(396, 44);
             txtEmail.TabIndex = 1;
             // 
             // txtOTP
             // 
             txtOTP.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            txtOTP.Location = new Point(184, 201);
+            txtOTP.Location = new Point(230, 251);
+            txtOTP.Margin = new Padding(4, 4, 4, 4);
             txtOTP.Name = "txtOTP";
             txtOTP.PlaceholderText = "OTP";
-            txtOTP.Size = new Size(216, 38);
+            txtOTP.Size = new Size(269, 44);
             txtOTP.TabIndex = 4;
             // 
             // btnLogin
             // 
-            btnLogin.BackColor = Color.Red;
+            btnLogin.BackColor = Color.Lime;
             btnLogin.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
             btnLogin.ForeColor = Color.White;
-            btnLogin.Location = new Point(184, 317);
+            btnLogin.Location = new Point(230, 396);
+            btnLogin.Margin = new Padding(4, 4, 4, 4);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(155, 48);
+            btnLogin.Size = new Size(194, 60);
             btnLogin.TabIndex = 8;
             btnLogin.Text = "Login";
             btnLogin.UseVisualStyleBackColor = false;
@@ -84,9 +88,10 @@
             btnOTP.AutoSize = true;
             btnOTP.BackColor = Color.Aqua;
             btnOTP.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnOTP.Location = new Point(406, 199);
+            btnOTP.Location = new Point(508, 249);
+            btnOTP.Margin = new Padding(4, 4, 4, 4);
             btnOTP.Name = "btnOTP";
-            btnOTP.Size = new Size(94, 41);
+            btnOTP.Size = new Size(118, 51);
             btnOTP.TabIndex = 9;
             btnOTP.Text = "OTP";
             btnOTP.UseVisualStyleBackColor = false;
@@ -97,9 +102,10 @@
             button1.BackColor = Color.Red;
             button1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(347, 317);
+            button1.Location = new Point(434, 396);
+            button1.Margin = new Padding(4, 4, 4, 4);
             button1.Name = "button1";
-            button1.Size = new Size(155, 48);
+            button1.Size = new Size(194, 60);
             button1.TabIndex = 10;
             button1.Text = "Quay lại";
             button1.UseVisualStyleBackColor = false;
@@ -107,11 +113,11 @@
             // 
             // LoginOTP
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ButtonHighlight;
+            BackColor = SystemColors.Info;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(682, 403);
+            ClientSize = new Size(852, 504);
             Controls.Add(button1);
             Controls.Add(btnOTP);
             Controls.Add(btnLogin);

@@ -55,91 +55,92 @@
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label1);
-            groupBox1.Location = new Point(25, 71);
+            groupBox1.Location = new Point(31, 89);
             groupBox1.Margin = new Padding(2);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(2);
-            groupBox1.Size = new Size(606, 134);
+            groupBox1.Size = new Size(758, 168);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Thông tin";
             // 
             // textBox3
             // 
-            textBox3.Location = new Point(110, 100);
+            textBox3.Location = new Point(138, 125);
             textBox3.Margin = new Padding(2);
             textBox3.Name = "textBox3";
             textBox3.PlaceholderText = "Nhập thông tin cần tìm kiếm";
-            textBox3.Size = new Size(411, 27);
+            textBox3.Size = new Size(513, 31);
             textBox3.TabIndex = 5;
             textBox3.TextChanged += textBox3_TextChanged;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(110, 65);
+            textBox2.Location = new Point(138, 81);
             textBox2.Margin = new Padding(2);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(411, 27);
+            textBox2.Size = new Size(513, 31);
             textBox2.TabIndex = 4;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(110, 27);
+            textBox1.Location = new Point(138, 34);
             textBox1.Margin = new Padding(2);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(411, 27);
+            textBox1.Size = new Size(513, 31);
             textBox1.TabIndex = 3;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(25, 103);
+            label3.Location = new Point(31, 129);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(70, 20);
+            label3.Size = new Size(84, 25);
             label3.TabIndex = 2;
             label3.Text = "Tìm kiếm";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(25, 68);
+            label2.Location = new Point(31, 85);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(81, 20);
+            label2.Size = new Size(95, 25);
             label2.TabIndex = 1;
             label2.Text = "Tên tác giả";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(25, 30);
+            label1.Location = new Point(31, 38);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(79, 20);
+            label1.Size = new Size(94, 25);
             label1.TabIndex = 0;
             label1.Text = "Mã tác giả";
             // 
             // groupBox2
             // 
             groupBox2.Controls.Add(dataGridView1);
-            groupBox2.Location = new Point(11, 251);
+            groupBox2.Location = new Point(14, 314);
             groupBox2.Margin = new Padding(2);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(2);
-            groupBox2.Size = new Size(620, 228);
+            groupBox2.Size = new Size(775, 285);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             // 
             // dataGridView1
             // 
+            dataGridView1.BackgroundColor = SystemColors.ButtonHighlight;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(5, 24);
+            dataGridView1.Location = new Point(6, 30);
             dataGridView1.Margin = new Padding(2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 62;
             dataGridView1.RowTemplate.Height = 33;
-            dataGridView1.Size = new Size(611, 200);
+            dataGridView1.Size = new Size(764, 250);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellClick += dataGridView1_CellClick;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
@@ -148,51 +149,55 @@
             // 
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
-            label12.Location = new Point(266, 18);
+            label12.Location = new Point(332, 22);
             label12.Margin = new Padding(2, 0, 2, 0);
             label12.Name = "label12";
-            label12.Size = new Size(121, 37);
+            label12.Size = new Size(145, 45);
             label12.TabIndex = 8;
             label12.Text = "TÁC GIẢ";
             // 
             // button1
             // 
-            button1.Location = new Point(78, 219);
+            button1.BackColor = Color.Lime;
+            button1.Location = new Point(98, 274);
             button1.Margin = new Padding(2);
             button1.Name = "button1";
-            button1.Size = new Size(90, 27);
+            button1.Size = new Size(112, 34);
             button1.TabIndex = 9;
             button1.Text = "Thêm";
-            button1.UseVisualStyleBackColor = true;
+            button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
             // button2
             // 
-            button2.Location = new Point(246, 219);
+            button2.BackColor = Color.Lime;
+            button2.Location = new Point(308, 274);
             button2.Margin = new Padding(2);
             button2.Name = "button2";
-            button2.Size = new Size(90, 27);
+            button2.Size = new Size(112, 34);
             button2.TabIndex = 10;
             button2.Text = "Sửa";
-            button2.UseVisualStyleBackColor = true;
+            button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click;
             // 
             // button4
             // 
-            button4.Location = new Point(430, 219);
+            button4.BackColor = Color.Red;
+            button4.Location = new Point(538, 274);
             button4.Margin = new Padding(2);
             button4.Name = "button4";
-            button4.Size = new Size(90, 27);
+            button4.Size = new Size(112, 34);
             button4.TabIndex = 12;
             button4.Text = "Thoát";
-            button4.UseVisualStyleBackColor = true;
+            button4.UseVisualStyleBackColor = false;
             button4.Click += button4_Click;
             // 
             // Tacgia
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(640, 490);
+            BackColor = SystemColors.Info;
+            ClientSize = new Size(800, 612);
             Controls.Add(button4);
             Controls.Add(button2);
             Controls.Add(button1);

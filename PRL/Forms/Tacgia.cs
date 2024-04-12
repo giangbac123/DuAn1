@@ -16,7 +16,7 @@ namespace PRL.Forms
     {
         string username, pass;
         TacGiaRepos _repos = new TacGiaRepos();
-        public Tacgia(string username,string mk)
+        public Tacgia(string username, string mk)
         {
             InitializeComponent();
             this.username = username;

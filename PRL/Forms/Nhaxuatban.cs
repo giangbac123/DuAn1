@@ -139,8 +139,8 @@ namespace PRL.Forms
         {
             if (textBox5.Text != "")
             {
-var a = _repos.GetSearch(textBox5.Text);
-            LoadData(a);
+                var a = _repos.GetSearch(textBox5.Text);
+                LoadData(a);
             }
             else
             {

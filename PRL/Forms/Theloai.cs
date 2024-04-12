@@ -15,7 +15,7 @@ namespace PRL.Forms
     public partial class Theloai : Form
     {
         TheLoaiRepos _repos = new TheLoaiRepos();
-        
+
         string username, pass;
         public Theloai(string tk, string mk)
         {
@@ -138,15 +138,15 @@ namespace PRL.Forms
         {
             NguoidungRepos _ng = new NguoidungRepos();
             var a = _ng.GetAll().FirstOrDefault(x => x.Mand == username && x.Chucdanh == false);
-            if(a! == null)
+            if (a! == null)
             {
-                GiaodienAdmin ad = new GiaodienAdmin(username,pass);
+                GiaodienAdmin ad = new GiaodienAdmin(username, pass);
                 ad.Show();
                 this.Hide();
             }
             else
             {
-                GiaodienNV ad = new GiaodienNV(username,pass);
+                GiaodienNV ad = new GiaodienNV(username, pass);
                 ad.Show();
                 this.Hide();
             }

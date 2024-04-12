@@ -295,7 +295,7 @@ namespace PRL.Forms
             NXB_ComboBox.ValueMember = "Manxb";
             NXB_ComboBox.SelectedIndex = -1;
         }
-        
+
         private void TimKiemTen_Texbox_TextChanged(object sender, EventArgs e)
         {
             if (TimKiemTen_Texbox.Text != "")

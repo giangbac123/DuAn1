@@ -40,8 +40,9 @@
             pictureBox1.BackColor = Color.White;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Margin = new Padding(4, 4, 4, 4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(380, 380);
+            pictureBox1.Size = new Size(475, 475);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -49,37 +50,42 @@
             // button1
             // 
             button1.AutoSize = true;
+            button1.BackColor = Color.Lime;
             button1.ForeColor = Color.Black;
-            button1.Location = new Point(54, 427);
+            button1.Location = new Point(68, 534);
+            button1.Margin = new Padding(4, 4, 4, 4);
             button1.Name = "button1";
-            button1.Size = new Size(110, 40);
+            button1.Size = new Size(138, 50);
             button1.TabIndex = 1;
             button1.Text = "Xuất hóa đơn";
-            button1.UseVisualStyleBackColor = true;
+            button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
             // button2
             // 
+            button2.BackColor = Color.Red;
             button2.ForeColor = Color.Black;
-            button2.Location = new Point(203, 427);
+            button2.Location = new Point(254, 534);
+            button2.Margin = new Padding(4, 4, 4, 4);
             button2.Name = "button2";
-            button2.Size = new Size(110, 40);
+            button2.Size = new Size(138, 50);
             button2.TabIndex = 2;
             button2.Text = "Hủy";
-            button2.UseVisualStyleBackColor = true;
+            button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click;
             // 
             // MaQR
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.White;
-            ClientSize = new Size(375, 503);
+            BackColor = SystemColors.Info;
+            ClientSize = new Size(469, 629);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(pictureBox1);
             ForeColor = SystemColors.Control;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(4, 4, 4, 4);
             Name = "MaQR";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Mã QR";

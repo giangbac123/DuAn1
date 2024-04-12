@@ -83,7 +83,7 @@ namespace PRL.Forms
                 {
                     if (_repos.Login(txtEmail.Text, b.Matkhau.ToString(), true))
                     {
-                        GiaodienAdmin gd = new GiaodienAdmin(txtEmail.Text,b.Matkhau.ToString());
+                        GiaodienAdmin gd = new GiaodienAdmin(txtEmail.Text, b.Matkhau.ToString());
                         MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         gd.Show();
                         this.Hide();

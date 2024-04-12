@@ -30,11 +30,11 @@ namespace PRL.Forms
             {
                 if (!string.IsNullOrEmpty(maphieu))
                 {
-                    
+
                 }
                 else
                 {
-                    MessageBox.Show("Vui lòng nhập mã hóa đơn.","Lỗi",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    MessageBox.Show("Vui lòng nhập mã hóa đơn.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
@@ -48,7 +48,7 @@ namespace PRL.Forms
             DialogResult result = MessageBox.Show("Bạn có muốn hủy thanh toán không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                
+
             }
         }
     }

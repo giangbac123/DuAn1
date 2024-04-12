@@ -44,9 +44,10 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(251, 32);
+            label1.Location = new Point(314, 40);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(182, 81);
+            label1.Size = new Size(216, 96);
             label1.TabIndex = 0;
             label1.Text = "Login";
             label1.Click += label1_Click;
@@ -54,18 +55,20 @@
             // textBox1
             // 
             textBox1.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox1.Location = new Point(302, 141);
+            textBox1.Location = new Point(378, 176);
+            textBox1.Margin = new Padding(4, 4, 4, 4);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(200, 38);
+            textBox1.Size = new Size(249, 44);
             textBox1.TabIndex = 1;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(182, 144);
+            label2.Location = new Point(228, 180);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(120, 32);
+            label2.Size = new Size(140, 38);
             label2.TabIndex = 3;
             label2.Text = "Tài khoản:";
             // 
@@ -73,27 +76,30 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(182, 204);
+            label3.Location = new Point(228, 255);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(120, 32);
+            label3.Size = new Size(139, 38);
             label3.TabIndex = 5;
             label3.Text = "Mật khẩu:";
             // 
             // textBox3
             // 
             textBox3.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox3.Location = new Point(302, 201);
+            textBox3.Location = new Point(378, 251);
+            textBox3.Margin = new Padding(4, 4, 4, 4);
             textBox3.Name = "textBox3";
-            textBox3.Size = new Size(200, 38);
+            textBox3.Size = new Size(249, 44);
             textBox3.TabIndex = 4;
             textBox3.UseSystemPasswordChar = true;
             // 
             // checkBox1
             // 
             checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(189, 271);
+            checkBox1.Location = new Point(236, 339);
+            checkBox1.Margin = new Padding(4, 4, 4, 4);
             checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(148, 24);
+            checkBox1.Size = new Size(178, 29);
             checkBox1.TabIndex = 6;
             checkBox1.Text = "Hiển thị mật khẩu";
             checkBox1.UseVisualStyleBackColor = true;
@@ -102,9 +108,10 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(384, 271);
+            label4.Location = new Point(480, 339);
+            label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(116, 20);
+            label4.Size = new Size(142, 25);
             label4.TabIndex = 7;
             label4.Text = "Quên mật khẩu?";
             label4.Click += label4_Click;
@@ -113,12 +120,13 @@
             // 
             // button1
             // 
-            button1.BackColor = Color.Red;
+            button1.BackColor = Color.Lime;
             button1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(184, 317);
+            button1.Location = new Point(230, 396);
+            button1.Margin = new Padding(4, 4, 4, 4);
             button1.Name = "button1";
-            button1.Size = new Size(155, 48);
+            button1.Size = new Size(194, 60);
             button1.TabIndex = 8;
             button1.Text = "Login";
             button1.UseVisualStyleBackColor = false;
@@ -126,12 +134,13 @@
             // 
             // btnOTP
             // 
-            btnOTP.BackColor = Color.Red;
+            btnOTP.BackColor = Color.LawnGreen;
             btnOTP.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
             btnOTP.ForeColor = Color.White;
-            btnOTP.Location = new Point(347, 317);
+            btnOTP.Location = new Point(434, 396);
+            btnOTP.Margin = new Padding(4, 4, 4, 4);
             btnOTP.Name = "btnOTP";
-            btnOTP.Size = new Size(155, 48);
+            btnOTP.Size = new Size(194, 60);
             btnOTP.TabIndex = 9;
             btnOTP.Text = "Login OTP";
             btnOTP.UseVisualStyleBackColor = false;
@@ -139,11 +148,11 @@
             // 
             // Login
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ButtonHighlight;
+            BackColor = SystemColors.Info;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(682, 403);
+            ClientSize = new Size(852, 504);
             Controls.Add(btnOTP);
             Controls.Add(button1);
             Controls.Add(label4);
