@@ -48,7 +48,6 @@
             panel4 = new Panel();
             label2 = new Label();
             button4 = new Button();
-            button13 = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
@@ -60,7 +59,6 @@
             // 
             panel1.BackColor = Color.White;
             panel1.BorderStyle = BorderStyle.Fixed3D;
-            panel1.Controls.Add(button13);
             panel1.Controls.Add(button12);
             panel1.Controls.Add(button6);
             panel1.Controls.Add(button3);
@@ -77,7 +75,7 @@
             // 
             button12.AutoSize = true;
             button12.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            button12.Location = new Point(38, 351);
+            button12.Location = new Point(38, 305);
             button12.Name = "button12";
             button12.Size = new Size(175, 40);
             button12.TabIndex = 7;
@@ -89,7 +87,7 @@
             // 
             button6.AutoSize = true;
             button6.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            button6.Location = new Point(38, 305);
+            button6.Location = new Point(38, 259);
             button6.Name = "button6";
             button6.Size = new Size(175, 40);
             button6.TabIndex = 6;
@@ -101,7 +99,7 @@
             // 
             button3.AutoSize = true;
             button3.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            button3.Location = new Point(38, 397);
+            button3.Location = new Point(38, 351);
             button3.Name = "button3";
             button3.Size = new Size(175, 40);
             button3.TabIndex = 5;
@@ -113,7 +111,7 @@
             // 
             button2.AutoSize = true;
             button2.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            button2.Location = new Point(38, 443);
+            button2.Location = new Point(38, 397);
             button2.Name = "button2";
             button2.Size = new Size(175, 40);
             button2.TabIndex = 4;
@@ -289,18 +287,6 @@
             button4.UseVisualStyleBackColor = true;
             button4.Click += button4_Click;
             // 
-            // button13
-            // 
-            button13.AutoSize = true;
-            button13.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            button13.Location = new Point(38, 259);
-            button13.Name = "button13";
-            button13.Size = new Size(175, 40);
-            button13.TabIndex = 10;
-            button13.Text = "Xử lý vi phạm";
-            button13.UseVisualStyleBackColor = true;
-            button13.Click += button13_Click;
-            // 
             // GiaodienAdmin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -347,6 +333,5 @@
         private Button button10;
         private Button button11;
         private Button button12;
-        private Button button13;
     }
 }

@@ -94,12 +94,14 @@ namespace PRL.Forms
             phiếuMượnToolStripMenuItem.Name = "phiếuMượnToolStripMenuItem";
             phiếuMượnToolStripMenuItem.Size = new Size(102, 24);
             phiếuMượnToolStripMenuItem.Text = "Phiếu mượn";
+            phiếuMượnToolStripMenuItem.Click += phiếuMượnToolStripMenuItem_Click;
             // 
             // phiếuTrảToolStripMenuItem
             // 
             phiếuTrảToolStripMenuItem.Name = "phiếuTrảToolStripMenuItem";
             phiếuTrảToolStripMenuItem.Size = new Size(81, 24);
             phiếuTrảToolStripMenuItem.Text = "Phiếu trả";
+            phiếuTrảToolStripMenuItem.Click += phiếuTrảToolStripMenuItem_Click;
             // 
             // groupBox1
             // 
@@ -130,6 +132,7 @@ namespace PRL.Forms
             button1.TabIndex = 4;
             button1.Text = "Thoát";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // groupBox2
             // 
@@ -153,6 +156,7 @@ namespace PRL.Forms
             // 
             // ViewSach
             // 
+            ViewSach.AllowUserToAddRows = false;
             ViewSach.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             ViewSach.Location = new Point(6, 80);
             ViewSach.Name = "ViewSach";
@@ -215,6 +219,7 @@ namespace PRL.Forms
             txttenkh.Name = "txttenkh";
             txttenkh.Size = new Size(125, 27);
             txttenkh.TabIndex = 52;
+            txttenkh.KeyPress += txttenkh_KeyPress;
             // 
             // txtid
             // 
@@ -313,6 +318,7 @@ namespace PRL.Forms
             txtsl.TabIndex = 39;
             txtsl.Text = "0";
             txtsl.TextChanged += txtsl_TextChanged;
+            txtsl.KeyPress += txtsl_KeyPress;
             // 
             // label7
             // 
@@ -356,6 +362,7 @@ namespace PRL.Forms
             txtcccd.Name = "txtcccd";
             txtcccd.Size = new Size(125, 27);
             txtcccd.TabIndex = 44;
+            txtcccd.KeyPress += txtcccd_KeyPress;
             // 
             // label4
             // 
@@ -413,6 +420,7 @@ namespace PRL.Forms
             // 
             // ViewCT
             // 
+            ViewCT.AllowUserToAddRows = false;
             ViewCT.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             ViewCT.Location = new Point(9, 26);
             ViewCT.Name = "ViewCT";
@@ -435,6 +443,7 @@ namespace PRL.Forms
             // 
             // ViewHD
             // 
+            ViewHD.AllowUserToAddRows = false;
             ViewHD.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             ViewHD.Location = new Point(6, 26);
             ViewHD.Name = "ViewHD";
@@ -455,6 +464,7 @@ namespace PRL.Forms
             button2.TabIndex = 25;
             button2.Text = "Pay";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // Phieumuon
             // 

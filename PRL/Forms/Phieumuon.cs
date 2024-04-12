@@ -20,6 +20,7 @@ namespace PRL.Forms
         PhieuMuonCTRepos _ct = new PhieuMuonCTRepos();
         PhieuMuonRepos _repos = new PhieuMuonRepos();
         int id = 0;
+
         public Phieumuon(string username, string mk)
         {
             InitializeComponent();
@@ -27,6 +28,12 @@ namespace PRL.Forms
             pass = mk;
             LoadData(_repos.GetAllPhieumuon());
             LoadSach(_sach.GetAll());
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.CustomFormat = "dd/MM/yyyy";
+
+            dateTimePicker2.Format = DateTimePickerFormat.Custom;
+            dateTimePicker2.CustomFormat = "dd/MM/yyyy";
+
         }
         private void LoadSach(dynamic data)
         {
@@ -46,7 +53,9 @@ namespace PRL.Forms
         }
         private void btnClear_Click(object sender, EventArgs e)
         {
-            
+            btnTK.Text = textBox1.Text = txtid.Text = txttenkh.Text = txtcccd.Text = txttrangthai.Text = "";
+            txtsl.Text = txttien.Text = "0";
+            dateTimePicker1.Value = dateTimePicker2.Value = DateTime.Today;
         }
         private string RandomID()
         {
@@ -83,18 +92,24 @@ namespace PRL.Forms
                         {
                             if (txtcccd.Text.Length == 12)
                             {
-                                var a = _repos.AddHoaDon(new DAL.Models.Phieumuon
+
+                                DialogResult canhbao = MessageBox.Show("Khách hàng khi mượn sách sẽ bị cửa hàng giữ lại thẻ CCCD công dân!\n Nếu đồng ý thì ấn 'OK' và tiếp tục thủ tục. Nếu không đồng ý thì ấn 'Cancel' thủ tục sẽ bị hủy ngay lập tức", "Cảnh báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                                if (canhbao == DialogResult.OK)
                                 {
-                                    Mamuon = RandomID(),
-                                    Tenkh = txttenkh.Text,
-                                    Cccd = txtcccd.Text,
-                                    Trangthai = "Đang mượn"
-                                });
-                                if (a)
-                                {
-                                    LoadData(_repos.GetAllPhieumuon());
-                                    MessageBox.Show("Tạo phiếu thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    var a = _repos.AddHoaDon(new DAL.Models.Phieumuon
+                                    {
+                                        Mamuon = RandomID(),
+                                        Tenkh = txttenkh.Text,
+                                        Cccd = txtcccd.Text,
+                                        Trangthai = "Đang mượn"
+                                    });
+                                    if (a)
+                                    {
+                                        LoadData(_repos.GetAllPhieumuon());
+                                        MessageBox.Show("Tạo phiếu thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    }
                                 }
+
                             }
                             else
                             {
@@ -204,7 +219,7 @@ namespace PRL.Forms
             ViewCT.ColumnCount = 7;
             int stt = 1;
             ViewCT.Columns[0].Name = "STT";
-            ViewCT.Columns[1].Name = "ID";
+            ViewCT.Columns[1].Name = "ID"; ViewCT.Columns[1].Visible = false;
             ViewCT.Columns[2].Name = "Mã sách";
             ViewCT.Columns[3].Name = "Số lượng";
             ViewCT.Columns[4].Name = "Tiền phí";
@@ -404,7 +419,7 @@ namespace PRL.Forms
 
         private void button3_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Bạn có muộn tạo thông tin không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show("Bạn có muốn sửa thông tin không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
                 if (txtid.Text == "" && txtsach.Text == "" && txtsl.Text == "")
@@ -470,7 +485,20 @@ namespace PRL.Forms
                                             }
                                             else
                                             {
-
+                                                var ct = _ct.GetAll().FirstOrDefault(x => x.Mamuonct == id);
+                                                var up = _ct.UpdateCT(check.Mamuonct, new Phieumuonct
+                                                {
+                                                    Masach = check.Masach,
+                                                    Soluong = check.Soluong - check.Soluong + soluong,
+                                                    Tienphi = int.Parse(txttien.Text),
+                                                    Ngaymuon = check.Ngaymuon,
+                                                    Ngaytra = check.Ngaytra,
+                                                });
+                                                if (up)
+                                                {
+                                                    LoadHDCT(_ct.GetByPhieumuonCT(txtid.Text));
+                                                    MessageBox.Show("Thêm thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                                }
                                             }
                                         }
                                         else
@@ -594,13 +622,93 @@ namespace PRL.Forms
                         txttien.Text = "0";
                     }
                 }
-                
+
             }
             else
             {
                 txtsl.Text = "0";
                 txttien.Text = "0";
             }
+        }
+
+        private void txtsl_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            string text = txtsl.Text.Insert(txtsl.SelectionStart, e.KeyChar.ToString());
+            int value;
+            if (!int.TryParse(text, out value) || value < 0)
+            {
+                txtsl.Text = "0";
+                e.Handled = true;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            NguoidungRepos _ng = new NguoidungRepos();
+            var a = _ng.GetAll().FirstOrDefault(x => (x.Mand == username || x.Email == username) && x.Matkhau == pass && x.Chucdanh == false);
+            if (a! == null)
+            {
+                GiaodienAdmin ad = new GiaodienAdmin(username, pass);
+                ad.Show();
+                this.Hide();
+            }
+            else
+            {
+                GiaodienNV ad = new GiaodienNV(username, pass);
+                ad.Show();
+                this.Hide();
+            }
+        }
+
+        private void txttenkh_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != ' ')
+            {
+                // Nếu không phải là chữ cái hoặc dấu cách, hủy bỏ ký tự nhập vào
+                e.Handled = true;
+            }
+        }
+
+        private void txtcccd_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Bạn có muốn thanh toán không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                if (txtid.Text != "")
+                {
+                    HoaDonCho hoaDonCho = new HoaDonCho(username, pass, txtid.Text);
+                    hoaDonCho.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Vui lòng chọn phiếu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void phiếuMượnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void phiếuTrảToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Phieutra phieutra = new Phieutra(username, pass);
+            phieutra.Show();
+            this.Hide();
         }
     }
 }
